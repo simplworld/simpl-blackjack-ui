@@ -1,0 +1,31 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = falseroot = true
+
+# 4 space indentation for python
+[*.py]
+indent_style = space
+indent_size = 4
+
+# 2 spaces for javascript
+[*.{js,jsx}]
+indent_style = space
+indent_size = 2
+
+# 2 spaces for html
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.{css,sass,scss}]
+indent_style = space
+indent_size = 2
