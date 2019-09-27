@@ -1,0 +1,17 @@
+Django==2.2
+django-username-email==2.2.4
+django-environ==0.4.5
+djangorestframework==3.9.4
+
+django-bootstrap3==8.2.1
+
+# Simpl Modules
+simpl-client==0.7.5
+
+django-webpack-loader==0.6.0
+
+gunicorn==19.8.1
+envparse==0.2.0
+
+# Dev requirements
+autobahn==17.10.1
