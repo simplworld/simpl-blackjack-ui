@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-
+import { simpl } from 'simpl-react/lib/decorators/simpl';
+import ConnectionStatus from './components/connection-status/connection-status';
 import Routes from './routes/root';
 
 
@@ -52,4 +53,23 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+const AppContainer = connect(
+  mapStateToProps, mapDispatchToProps
+)(App);
+
+
+const runs = RUNS.map((id) => `model:model.run.${id}`);
+const runusers = RUNUSERS.map((id) => `model:model.runuser.${id}`);
+const worlds = WORLDS.map((id) => `model:model.world.${id}`);
+const topics = (LEADER) ? runs : runusers.concat(worlds);
+console.log("topics: ", topics);
+
+export default simpl({
+  authid: AUTHID,
+  password: 'nopassword',
+  url: `${MODEL_SERVICE}`,
+  progressComponent: ConnectionStatus,
+  root_topic: ROOT_TOPIC,
+  topics: () => topics,
+  loadAllScenarios: LEADER
+})(AppContainer);
