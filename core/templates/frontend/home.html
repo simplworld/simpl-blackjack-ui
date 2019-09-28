@@ -1,13 +1,17 @@
+<!DOCTYPE html>
 {% load render_bundle from webpack_loader %}
 {% load staticfiles %}
 <html>
   <head>
-    <style>
-    table, th, td { border: 1px solid black;  }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wharton Blackjack</title>
+    <meta name="description" content="Wharton Blackjack">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% render_bundle 'main' 'css' %}
   </head>
   <body>
-    <div id="App"></div>
+    <div id="app"></div>
     <script type="text/javascript">
       var AUTOBAHN_DEBUG = false;
       var MODEL_SERVICE = '{{ MODELSERVICE_WS }}';
@@ -24,7 +28,6 @@
       console.log("RUNS: ", RUNS);
       console.log("RUNUSERS: ", RUNUSERS);
     </script>
-    {% render_bundle 'common' %}
-    {% render_bundle 'main' %}
+    {% render_bundle 'main' 'js' %}
   </body>
 </html>

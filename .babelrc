@@ -1,12 +1,19 @@
 {
   "presets": [
-    "es2015",
-    "stage-0",
+    ["env", {
+      "es2015": {
+          "modules": false
+      },
+      "targets": {
+      "browsers": ["last 2 versions", "ie >= 10"]
+    }
+    }],
     "react"
   ],
   "plugins": [
-    "transform-inline-environment-variables",
-    "transform-object-assign",
-    "transform-runtime"
+    "react-hot-loader/babel",
+    "transform-class-properties",
+    "transform-decorators",
+    "emotion"
   ]
 }

@@ -1,0 +1,14 @@
+.hand {
+  z-index: 3;
+  display: flex;
+  flex: 1 0 50%;
+  flex-direction: column;
+}
+
+.cards {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

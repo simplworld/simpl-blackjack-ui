@@ -1,122 +1,152 @@
-require('babel-register');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
+const p = require('babel-plugin-transform-class-properties');
+const postcssPresetEnv = require('postcss-preset-env');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-var path = require('path');
-var glob = require('glob');
 
-var BundleTracker = require('webpack-bundle-tracker');
+// Adjust publicPath depending on local or prod
+let publicPath = 'http://localhost:8081/';
+if (process.env.NODE_ENV === 'production') {
+    publicPath = './';
+}
 
-var entry_points = {
-  common: [
-    'react', 'react-dom', 'simpl-react', 'react-redux', 'redux', 'redux-recycle', 'history',
-  ],
-};
-
-glob.sync('js/*.js')
-  .forEach(function (_path) {
-    var filename = _path.split('/').slice(-1)[0];
-    if (filename.endsWith('.js') || filename.endsWith('.jsx')) {
-      entry_points[filename.split('.')[0]] = path.resolve(_path.split('.').slice(0, -1).join('.'));
-    }
-  });
-
-process.stdout.write('Entry points: ' + JSON.stringify(entry_points) + '\n');
-
-var config = {
+const config = {
   context: __dirname,
-  entry: entry_points,
+  entry: {
+    main: './frontend/js/index.js',
+  },
+  watch: process.env.NODE_ENV !== 'production',
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+  },
+  resolve: { symlinks: false },
   output: {
-    path: path.resolve('./staticfiles/webpack_bundles/'),
-    filename: process.env.NODE_ENV === 'production' ? '[name]-[hash].js' : '[name].bundle.js',
-  },
-  resolve: {
-    modules: [
-      'node_modules',
-    ],
-    extensions: ['*', '.js', '.jsx', '.json'],
-  },
-  node: {
-    fs: 'empty',
-    tls: 'empty'
+    path: path.resolve('./bundles'),
+    filename: '[name].bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.md$/,
-        enforce: "pre",
-        loader: 'html-loader!markdown-loader'
-      },
-      {
-        test: /\.js$/,
-        enforce: "pre",
-        loader: 'eslint-loader',
-        options: {emitWarning: true},
-        exclude: /node_modules/
-      },
-      {
-        test: /\.jsx$/,
-        enforce: "pre",
-        loader: 'eslint-loader',
-        options: {emitWarning: true},
-        exclude: /node_modules/
-      },
-      {
         test: /\.jsx?$/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, "js"),
-          path.resolve(__dirname, "node_modules", "utf-8-validate"),
-          path.resolve(__dirname, "node_modules", "ws", "lib"),
-        ],
         query: {
-          plugins: [
-            'transform-runtime',
-            'transform-object-assign',
-            'transform-inline-environment-variables',
-          ],
-          presets: ['es2015', 'stage-0', 'react'],
+          presets: ['env', 'react', 'stage-2'],
+          plugins: [p],
         }
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => (
+                [
+                  postcssPresetEnv(),
+                  require('autoprefixer')
+                ]
+              )
+            },
+          },
+          {
+            loader: 'sass-loader',
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(gif|ico|jpg|png|svg)$/,
+        include: [
+          path.resolve(__dirname, 'frontend/assets/images'),
+          path.resolve(__dirname, 'frontend/assets/images/favicons'),
+        ],
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+            publicPath,
+          }
+        }],
+        exclude: [
+          path.resolve(__dirname, 'frontend/assets/fonts'),
+          path.resolve(__dirname, 'frontend/assets/icons'),
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        include: path.resolve(__dirname, 'frontend/assets/fonts'),
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+            publicPath,
+          }
+        }]
+      },
+      {
+        test: /\.svg$/,
+        include: path.resolve(__dirname, 'frontend/assets/icons'),
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              icon: true,
+              replaceAttrValues: { '#29292d': 'currentColor' },
+              svgAttributes: {
+                fill: 'currentColor',
+              },
+            },
+          },
+        ],
+        exclude: [
+          path.resolve(__dirname, 'frontend/assets/fonts'),
+          path.resolve(__dirname, 'frontend/assets/images')
+        ]
       }
-    ],
-    noParse: [/\.min\.js/, /\.md/],
+    ]
   },
-  externals: {
-    'react/addons': true,
-    'react/lib/ExecutionEnvironment': true,
-    'react/lib/ReactContext': true
-  }
-}
+  plugins: [
+    new BundleTracker({ filename: './webpack-stats.json' }),
+  ]
+};
 
 if (process.env.NODE_ENV === 'production') {
-  config.output.filename = "[name]-[hash].js";
+  config.output.filename = '[name]-[hash].js';
   config.plugins = [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      minChunks: 3,
-      name: 'common',
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-    new BundleTracker({filename: './webpack-stats.json'}),
+    new UglifyJSPlugin(),
+    new BundleTracker({ filename: './webpack-stats.json' })
   ];
 } else {
   config.output.filename = '[name].bundle.js';
   config.devtool = 'cheap-eval-inline-source-map';
+  // config.devtool = 'source-map';
   config.plugins = [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"',
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      minChunks: 3,
-      name: 'common',
-    }),
-    new BundleTracker({filename: './webpack-stats.json'}),
+    new BundleTracker({ filename: './webpack-stats.json' })
   ];
 }
 
