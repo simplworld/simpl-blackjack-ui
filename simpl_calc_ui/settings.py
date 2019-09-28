@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'cuser',
     'users',
-    'frontend',
+    'core',
     'bootstrap3',
 ]
 

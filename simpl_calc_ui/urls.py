@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, logout_then_login
 
-from frontend import views
+from core import views as core_views
 
 from users import views as users_views
 from cuser.forms import AuthenticationForm
@@ -32,5 +32,5 @@ urlpatterns = \
             name='login'),
         url(r'^logout/$', logout_then_login, name='logout'),
         url(r'^admin/', admin.site.urls),
-        url(r'^.*$', views.HomeView.as_view()),
+        url(r'^.*$', core_views.HomeView.as_view()),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
