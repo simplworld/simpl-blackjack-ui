@@ -86,9 +86,9 @@ ENV/
 # Spyder project settings
 .spyderproject
 
+# Node
 node_modules/
 
-webpack-stats.json
 
 # Pycharm
 .idea
@@ -97,8 +97,16 @@ webpack-stats.json
 *.sqlite3
 
 # Webpack
-staticfiles/webpack_bundles
+frontend/bundles/
+bundles/
+media/
+static/
+webpack*stats.json
 
 # Mac
 .DS_Store
 ._*
+
+.tokens
+.pytest_cache
+Pipfile\.lock

@@ -1,25 +1,21 @@
-module.exports = {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+{
+    "parser": "babel-eslint",
+    "extends": "eslint-config-airbnb",
+    "rules": {
+        "comma-dangle": 0,
+        // current bug in eslint-plugin-react means this marks false-positives
+        // fixed in master, should be fixed in 4.2.2
+        // "react/prefer-stateless-function": 0,
+        // "react/prefer-es6-class": 0,
+        "react/jsx-filename-extension": 0,
+        //"jsx-a11y/anchor-is-valid": [ "error", {
+        //    "components": [ "Link" ],
+        //    "specialLink": [ "to", "hrefLeft", "hrefRight" ],
+        //    "aspects": [ "noHref", "invalidHref", "preferButton" ]
+        //}]
     },
-    "plugins": [
-        "react",
-        "import"
-    ],
     "env": {
         "browser": true,
-        "es6": true,
-    },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
-    "rules": {
-        // disable rules from base configurations
-        "no-console": "off",
-        "comma-dangle": "off",
-        "no-undef": "off",
-        "no-unused-vars": "off"
+        "jest": true
     }
-};
+}
