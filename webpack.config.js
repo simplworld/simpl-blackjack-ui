@@ -7,7 +7,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 
 // Adjust publicPath depending on local or prod
-let publicPath = 'http://localhost:8080/';
+let publicPath = 'http://localhost:8081/';
 if (process.env.NODE_ENV === 'production') {
     publicPath = './';
 }

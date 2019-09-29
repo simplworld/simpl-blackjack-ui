@@ -1,17 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { finalCreateStoreFactory } from 'simpl-react/lib/stores';
 
 import rootReducer from './reducers';
 
 
 export default function configureStore(initialState, middleware) {
-  const finalCreateStore = finalCreateStoreFactory(process.env.NODE_ENV);
-  const store = finalCreateStore(
+  const store = createStore(
     rootReducer,
     {
       ...initialState,
     },
+    composeWithDevTools(applyMiddleware(...middleware)),
   );
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
