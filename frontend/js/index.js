@@ -2,7 +2,6 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
@@ -28,18 +27,13 @@ const middleware = [
 
 const store = configureStore({}, middleware);
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Provider store={store}>
-        <Component history={history} />
-      </Provider>
-    </AppContainer>,
-    document.getElementById('app')
-  );
-};
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
 
-render(App);
 
 if (module.hot) {
   module.hot.accept(['./app'], () => {

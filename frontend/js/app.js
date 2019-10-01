@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom'
+
 import { connect } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import {simpl} from 'simpl-react/lib/decorators/simpl';
 
 import Routes from './routes/root';
+import ConnectionStatus from './components/connection-status/connection-status';
 
 
 // https://medium.com/lalilo/dynamic-transitions-with-react-router-and-react-transition-group-69ab795815c9
@@ -30,26 +32,33 @@ class App extends React.Component {
   }
 
   render() {
-    const { history } = this.props;
-
     return (
-      <ConnectedRouter history={history}>
+      <BrowserRouter>
         <Route component={Routes} />
-      </ConnectedRouter>
+      </BrowserRouter>
     );
   }
 }
 
-App.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired
-};
+App.propTypes = {};
 
-const mapStateToProps = state => ({
-});
+const AppContainer = connect(
+  null,
+  null
+)(App);
 
-const mapDispatchToProps = {
-};
+const runs = RUNS.map((id) => `model:model.run.${id}`);
+const runusers = RUNUSERS.map((id) => `model:model.runuser.${id}`);
+const worlds = WORLDS.map((id) => `model:model.world.${id}`);
+const topics = (LEADER) ? runs : runusers.concat(worlds);
+console.log("topics: ", topics);
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default simpl({
+  authid: AUTHID,
+  password: 'nopassword',
+  url: `${MODEL_SERVICE}`,
+  progressComponent: ConnectionStatus,
+  root_topic: ROOT_TOPIC,
+  topics: () => topics,
+  loadAllScenarios: LEADER
+})(AppContainer);

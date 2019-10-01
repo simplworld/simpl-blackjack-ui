@@ -1,15 +1,13 @@
-# simpl-calc-ui - example single-player simulation frontend service.
+# simpl-blackjack-ui - example blackjack game.
 
-## Python Setup (assumes Python >= 3.6, simpl-games-api and simpl-calc-model servers running)
+## Python Setup (assumes Python == 3.6, simpl-games-api and simpl-calc-model servers running)
 
 ```shell
-$ git clone git@github.com:simplworld/simpl-calc-ui.git
-$ cd simpl-calc-ui
-$ mkvirtualenv simpl-calc-ui
-$ add2virtualenv .
-
+$ create a virtual enviroment and activate it
+$ git clone git@github.com:simplworld/simpl-blackjack-ui.git
+$ cd simpl-blackjack-ui
 $ pip install -r requirements.txt
-$ ./manage.py migrate
+$ python manage.py migrate
 ```
 ## Run front end
 
@@ -26,20 +24,13 @@ var AUTOBAHN_DEBUG = true;
 Which will turn on verbose debugging of the Autobahn/Websockets to help debug interactions between the browser and model service backend.
 If you do this, do NOT commit this change.
 
-Update node_modules and run Gulp to compile JS
+Install node_modules and run webpack to compile JS and SCSS
 
 ```shell
-$ cd to simpl-calc-ui directory
 $ npm install
-$ npm start
+$ npm run dev
 ```
 
-## Run javascript unit tests (run outside Vagrant)
-
-We use jest and enzyme for unit testing (see http://redux.js.org/docs/recipes/WritingTests.html)
-
-```shell
-$ npm test
 ```
 
 ## Debugging WAMP subscriptions and registrations

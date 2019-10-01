@@ -9,7 +9,6 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      flipped: false,
     };
   }
 
@@ -38,20 +37,25 @@ class Card extends React.Component {
   }
 
   render() {
-    const { faceDown, suit } = this.props;
+    const { faceDown, suit, transitionState } = this.props;
 
     const cardClasses = classNames(
       styles.card,
       {
+        [styles.faceDown]: faceDown === true,
         [styles.cardDiamonds]: suit === 'D',
         [styles.cardHearts]: suit === 'H',
         [styles.cardSpades]: suit === 'S',
         [styles.cardClubs]: suit === 'C',
+        [styles.cardEntering]: transitionState === 'entering',
+        [styles.cardEntered]: transitionState === 'entered',
+        [styles.cardEnteringFaceDown]: transitionState === 'entering' && !faceDown,
+        [styles.cardEnteredFaceDown]: transitionState === 'entered' && !faceDown,
       }
     );
 
     return (
-      <div onClick={() => this.setState({ flipped: !this.state.flipped })} className={cardClasses}>
+      <div className={cardClasses}>
         {!faceDown && this.renderFront()}
         <div className={styles.back} />
       </div>
@@ -65,11 +69,12 @@ Card.propTypes = {
   rank: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired,
+  ])
 };
 
 Card.defaultProps = {
-  faceDown: true
+  faceDown: true,
+  rank: null
 };
 
 

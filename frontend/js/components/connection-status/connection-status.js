@@ -8,15 +8,15 @@ function ConnectionStatus(props) {
   let content;
   if (props.connectionStatus === CONNECTION_STATUS.CONNECTING) {
     content = (
-      <p><i className="fa fa-cog fa-spin" aria-hidden="true"></i> Connecting…</p>
+      <p>Connecting…</p>
     );
   } else if (props.connectionStatus === CONNECTION_STATUS.CONNECTED) {
     content = (
-      <p><i className="fa fa-refresh fa-spin" aria-hidden="true"></i> Loading data…</p>
+      <p>Loading data…</p>
     );
   } else if (props.connectionStatus === CONNECTION_STATUS.OFFLINE) {
     content = (
-      <p><i className="fa fa-cog fa-spin" aria-hidden="true"></i> Connection lost.
+      <p> Connection lost.
         If the problem persists, please contact the administrator..</p>
     );
   }

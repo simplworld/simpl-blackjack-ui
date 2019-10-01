@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  CSSTransition,
+  Transition,
   TransitionGroup,
 } from 'react-transition-group';
 
@@ -26,18 +26,21 @@ class Hand extends React.Component {
         <div className={styles.cards}>
           <TransitionGroup component={null}>
             {cards.map((card, i) => (
-              <CSSTransition
+              <Transition
                 key={i}
-                classNames="card"
-                timeout={1300}
+                timeout={800}
+                appear
               >
+              {state => (
                 <Card
                   key={i}
                   rank={card.rank}
                   suit={card.suit}
                   faceDown={card.rank === null}
+                  transitionState={state}
                 />
-              </CSSTransition>
+              )}
+              </Transition>
             ))}
           </TransitionGroup>
         </div>
