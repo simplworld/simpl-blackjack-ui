@@ -63,7 +63,6 @@ export function formatFormikErrors(errors) {
   const formattedErrors = Object.assign(
     {},
     errors,
-    // ...Object.keys(errors).map(field => ({ [field]: errors[field].join(', ') }))
   );
 
   formattedErrors.nonFieldErrors = formattedErrors.non_field_errors;

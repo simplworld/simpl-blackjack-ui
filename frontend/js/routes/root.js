@@ -2,9 +2,11 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Spinner } from 'react-redux-spinner';
 import 'react-redux-spinner/dist/react-redux-spinner.css';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
-import BoardView from '../views/board/board';
+import BoardContainer from '../views/board/board-container';
+import LoginContainer from '../views/login/login-container';
 
 
 class Routes extends React.Component {
@@ -13,7 +15,18 @@ class Routes extends React.Component {
       <Route render={(props) => {
         return (
           <React.Fragment>
-            <Route path="/" component={BoardView} />
+            <TransitionGroup component={null}>
+              <CSSTransition
+                key={props.history.location.key}
+                classNames="fade"
+                timeout={300}
+              >
+                <Switch>
+                  <Route exact path="/game" component={BoardContainer} />
+                  <Route exact path="/" component={LoginContainer} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
           </React.Fragment>
         );
       }}

@@ -5,7 +5,7 @@ from simpl import subscribe
 
 
 class FrontendConfig(AppConfig):
-    name = 'frontend'
+    name = 'core'
 
     def ready(self):
         subscribe('user')

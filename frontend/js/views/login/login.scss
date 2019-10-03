@@ -1,0 +1,31 @@
+@import '../../../scss/vendors/foundation';
+
+$logo-width: 220px;
+$logo-height: 149px;
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex: 0 auto;
+  padding: 3rem 4rem 4rem 4rem;
+  background-color: #fff;
+  z-index: 4;
+  box-shadow: 0px 11px 54px 0px rgba(0,0,0,0.83);
+}
+
+.fields {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.submitButton {
+  margin-top: rem-calc(16px);
+}

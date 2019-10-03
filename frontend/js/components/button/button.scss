@@ -1,0 +1,55 @@
+@import '../../../scss/vendors';
+
+.button {
+  @include button();
+  @include button-expand(true);
+  font-size: rem-calc(14px);
+  font-weight: bold;
+  // border-radius: 4px;
+  line-height: 24px;
+  color: $white;
+  margin: 0;
+  -webkit-touch-callout:  none;
+            user-select:  none;
+  transition: all 0.45s ease-out, color 0.45s ease-out;
+}
+
+.hollow {
+  border: solid 2px $dark-gray;
+  background-color: transparent;
+  color: $dark-gray;
+  &:hover {
+    color: $dark-gray;
+    background-color: transparent;
+  }
+}
+
+.white {
+  border: solid 2px $white;
+  background-color: $white;
+  color: $red;
+  &:hover {
+    border: solid 2px $white;
+  }
+}
+
+.inactive {
+  opacity: 0.5;
+  cursor: none;
+}
+
+.disabled {
+  cursor:not-allowed;
+  background-color: #e27284;
+  &:hover {
+    background-color: #e27284;
+  }
+}
+
+.submitting {
+  cursor: progress;
+  background-color: transparent;
+  &:hover {
+    background-color: transparent;
+  }
+}

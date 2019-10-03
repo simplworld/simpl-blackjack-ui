@@ -6,6 +6,7 @@
 
 html, body {
   height: 100%;
+  width: 100%;
 }
 
 a {
@@ -20,14 +21,59 @@ a {
   outline: none;
 }
 
-:global(#app) {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-
 :global(.simpl) {
   overflow: hidden;
   width: 100%;
   height: 100%;
 }
+
+$logo-width: 220px;
+$logo-height: 149px;
+
+:global(#app) {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  min-width: 320px;
+  background-color: #004684;
+  box-shadow: inset 1px 1px 120px 30px rgba(3,3,3,.5);
+  background-image: url('../assets/images/fabric.jpg');
+  background-size: 400px 400px;
+  display: flex;
+  &:after {
+    z-index: 2;
+    content: '';
+    background-image: url('../assets/images/logo.png');
+    background-size: $logo-width $logo-height;
+    width: $logo-width;
+    height: $logo-height;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: $logo-width/2*-1;
+    margin-top: $logo-height/2*-1;
+  }
+}
+
+// FADE TRANSISTION
+:global(.fade-enter) {
+  opacity: 0;
+  z-index: 1;
+}
+
+:global(.fade-enter-active) {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+:global(.fade-exit) {
+  opacity: 1;
+}
+
+:global(.fade-exit-active) {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+

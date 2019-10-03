@@ -21,7 +21,9 @@ def payload_to_attrs(payload):
 class SimplBackend(object):
 
     @coro
-    async def authenticate(self, request, email=None, password=None):
+    async def authenticate(self, request, email=None, password=None, username=None):
+        # dirty fix for using rest_auth with this example
+        email = username
         user = None
         UserModel = get_user_model()
         simpl_client = GamesAPIClient(url=settings.SIMPL_GAMES_URL,

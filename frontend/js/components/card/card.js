@@ -77,5 +77,4 @@ Card.defaultProps = {
   rank: null
 };
 
-
 export default Card;

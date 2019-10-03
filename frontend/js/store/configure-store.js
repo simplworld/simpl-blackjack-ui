@@ -2,7 +2,7 @@ import {finalCreateStoreFactory} from 'simpl-react/lib/stores';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import rootReducer from './reducers';
+import rootReducer from '../reducers';
 
 
 export default function configureStore(initialState, middleware) {
@@ -10,14 +10,14 @@ export default function configureStore(initialState, middleware) {
     const store = finalCreateStore(
       rootReducer,
       initialState,
-      composeWithDevTools(applyMiddleware(...middleware)),
+      applyMiddleware(...middleware),
     );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
+    module.hot.accept('../reducers', () => {
       // eslint-disable-next-line global-require
-      const nextRootReducer = require('./reducers/index');
+      const nextRootReducer = require('../reducers/index');
       store.replaceReducer(nextRootReducer);
     });
   }

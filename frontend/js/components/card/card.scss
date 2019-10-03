@@ -139,7 +139,7 @@
 
 .cardEntering {
   &:nth-child(odd), &:nth-child(even) {
-    transform: translate3d(100vw, -100vh, 0);
+    transform: translate3d(100vw, -70vh, 0);
   }
 }
 

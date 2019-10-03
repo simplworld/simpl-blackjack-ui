@@ -1,30 +1,7 @@
-$logo-width: 220px;
-$logo-height: 149px;
-
-.board {
+.container {
   width: 100%;
   height: 100%;
-  z-index: 1;
-  position: relative;
-  min-width: 320px;
-  background-color: #114602;
-  box-shadow: inset 1px 1px 120px 30px rgba(3,3,3,.5);
-  background-image: url('../../../assets/images/fabric.jpg');
-  background-size: 400px 400px;
   display: flex;
   flex-direction: column;
-  &:after {
-    z-index: 2;
-    content: '';
-    background-image: url('../../../assets/images/logo.png');
-    background-size: $logo-width $logo-height;
-    width: $logo-width;
-    height: $logo-height;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: $logo-width/2*-1;
-    margin-top: $logo-height/2*-1;
-  }
 }
 
