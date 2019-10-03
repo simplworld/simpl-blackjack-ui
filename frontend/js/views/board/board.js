@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {simpl} from 'simpl-react/lib/decorators/simpl';
 
-import GameView from '../game/game';
+import GameContainer from '../game/game-container';
 import ConnectionStatus from '../../components/connection-status/connection-status';
 
 import styles from './board.scss';
@@ -27,7 +27,7 @@ class BoardView extends React.Component {
         root_topic: user.root_topic,
         topics: () => topics,
         loadAllScenarios: user.leader
-      })(GameView);
+      })(GameContainer);
 
       return (
         <SimplComponent />

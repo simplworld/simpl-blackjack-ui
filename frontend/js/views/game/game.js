@@ -57,6 +57,7 @@ class GameView extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className={styles.container}>
         <Hand cards={dealerCards} />
@@ -69,28 +70,6 @@ class GameView extends React.Component {
 
 GameView.propTypes = {
 };
-
-//const user =store.getState().auth.user
-//console.log(user)
-
-// if (user) {
-//   const runs = user.runs.map((id) => `model:model.run.${id}`);
-//   const runusers = user.runusers.map((id) => `model:model.runuser.${id}`);
-//   const worlds = user.worlds.map((id) => `model:model.world.${id}`);
-//   const topics = (user.leader) ? runs : runusers.concat(worlds);
-//   console.log("topics: ", topics);
-
-
-//   export default simpl({
-//     authid: user.auth_id,
-//     password: 'nopassword',
-//     url: `${user.modelservice_ws}`,
-//     progressComponent: ConnectionStatus,
-//     root_topic: user.root_topic,
-//     topics: () => topics,
-//     loadAllScenarios: user.leader
-//   })(GameView);
-// }
 
 export default GameView
 
