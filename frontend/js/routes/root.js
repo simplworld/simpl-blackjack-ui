@@ -15,18 +15,10 @@ class Routes extends React.Component {
       <Route render={(props) => {
         return (
           <React.Fragment>
-            <TransitionGroup component={null}>
-              <CSSTransition
-                key={props.history.location.key}
-                classNames="fade"
-                timeout={300}
-              >
-                <Switch>
-                  <Route exact path="/game" component={BoardContainer} />
-                  <Route exact path="/" component={LoginContainer} />
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
+            <Switch>
+              <Route exact path="/game" component={BoardContainer} />
+              <Route exact path="/" component={LoginContainer} />
+            </Switch>
           </React.Fragment>
         );
       }}

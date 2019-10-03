@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {simpl} from 'simpl-react/lib/decorators/simpl';
 
 import Hand from '../../components/hand/hand';
-import ConnectionStatus from '../../components/connection-status/connection-status';
-import store from '../../store/store';
+import UI from '../../components/ui/ui';
 
 import styles from './game.scss';
 
@@ -60,10 +58,11 @@ class GameView extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className={styles.container}>
         <Hand cards={dealerCards} />
         <Hand cards={playerCards} isPlayer />
-      </React.Fragment>
+        <UI />
+      </div>
     );
   }
 }
@@ -71,8 +70,8 @@ class GameView extends React.Component {
 GameView.propTypes = {
 };
 
-const user =store.getState().auth.user
-console.log(user)
+//const user =store.getState().auth.user
+//console.log(user)
 
 // if (user) {
 //   const runs = user.runs.map((id) => `model:model.run.${id}`);

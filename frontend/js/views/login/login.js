@@ -30,8 +30,8 @@ class Login extends React.Component {
               <TextField
                 name="email"
                 type="text"
-                label="Login"
-                placeholder="Email Address"
+                label="Email address"
+                placeholder="Enter your email address"
                 className="form-control"
                 required
               />
