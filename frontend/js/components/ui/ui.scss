@@ -1,16 +1,26 @@
 .container {
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  right: 0;
-  bottom: 0;
+
   display: flex;
-  flex-direction: column;
-  align-content: flex-end;
-  flex-flow: row wrap;
-  z-index: 8;
-  padding: 2rem;
+  flex-direction: row;
+  z-index: 28;
+  padding: 0 2rem 2rem 2rem;
+  align-items: center;
+  justify-content: center;
   button {
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
   }
+}
+
+
+.cardStack {
+  background-image: url(../../../assets/images/card-stack.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 192px;
+  height: 229px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 0;
 }

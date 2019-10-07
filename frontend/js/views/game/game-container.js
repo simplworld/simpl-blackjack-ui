@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 
+  import { submitDecision } from '../../actions/game';
+
 import GameView from './game';
 
 function mapStateToProps(state) {
@@ -15,27 +17,36 @@ function mapStateToProps(state) {
   const periods = _.sortBy(unsortedPeriods, (p) => p.order);
   const periodOrder = _.last(periods).order;
 
-  let total = 0;
+  let data = {};
   if (periodOrder > 1) { // pull total from last result
     const lastPeriod = periods[periodOrder - 2];
     const lastResult = state.simpl.result.find(
       (s) => lastPeriod.id === s.period
     );
-    total = lastResult.data.total;
+    data = lastResult.data.data;
   }
 
   const currentPeriod = periods[periodOrder - 1];
 
   return {
     runuser,
-    total,
+    data,
     currentPeriod
+  };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  console.log(ownProps);
+  return {
+    submitDecision(action, currentPeriod) {
+      dispatch(submitDecision(currentPeriod, action))
+    }
   };
 }
 
 const GameContainer = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(GameView);
 
 export default GameContainer;

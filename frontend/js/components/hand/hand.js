@@ -4,6 +4,8 @@ import {
   Transition,
   TransitionGroup,
 } from 'react-transition-group';
+import isEqual from 'lodash/isEqual';
+import classnames from 'classnames';
 
 import Card from '../card/card';
 
@@ -14,15 +16,41 @@ class Hand extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDealing: false,
+      cards: [],
     };
   }
 
+  // componentDidUpdate(prevProps) {
+  //   const { cards } = this.props;
+  //   if (!isEqual(prevProps.cards, cards)) {
+  //     this.setState({
+  //       cards: cards
+  //     })
+  //   }
+  // }
+
   render() {
-    const { cards } = this.props;
+    const { cards, score, isPlayer, runuser } = this.props;
+
+    let username = 'Dealer';
+    if (isPlayer) {
+      username = runuser.email
+    }
 
     return (
-      <div className={styles.hand}>
+      <div className={classnames(
+          styles.container, {
+            [styles.playerHand]: isPlayer,
+          })}
+      >
+        <div className={styles.username}>
+          {username}
+        </div>
+        <div className={styles.score}>
+          <div className={styles.scoreBaddge}>
+            {score}
+          </div>
+        </div>
         <div className={styles.cards}>
           <TransitionGroup component={null}>
             {cards.map((card, i) => (
@@ -33,10 +61,10 @@ class Hand extends React.Component {
               >
               {state => (
                 <Card
-                  key={i}
+                  key={card.rank + card.suit}
                   rank={card.rank}
                   suit={card.suit}
-                  faceDown={card.rank === null}
+                  faceDown={card.rank === 'blank'}
                   transitionState={state}
                 />
               )}

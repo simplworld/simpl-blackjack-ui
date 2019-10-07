@@ -27,8 +27,8 @@ a {
   height: 100%;
 }
 
-$logo-width: 220px;
-$logo-height: 149px;
+$logo-width: 952px;
+$logo-height: 75px;
 
 :global(#app) {
   position: absolute;
@@ -54,7 +54,7 @@ $logo-height: 149px;
     top: 50%;
     left: 50%;
     margin-left: $logo-width/2*-1;
-    margin-top: $logo-height/2*-1;
+    margin-top: -55 + $logo-height/2*-1;
   }
 }
 

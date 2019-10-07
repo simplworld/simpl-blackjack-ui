@@ -38,7 +38,7 @@ class Card extends React.Component {
 
   render() {
     const { faceDown, suit, transitionState } = this.props;
-
+    console.log(transitionState)
     const cardClasses = classNames(
       styles.card,
       {

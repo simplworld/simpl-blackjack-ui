@@ -24,12 +24,18 @@
   }
 }
 
-.white {
-  border: solid 2px $white;
-  background-color: $white;
-  color: $red;
+.circle {
+  border-radius: 100px;
+  width: auto;
+  height: 80px;
+  width: 80px;
+  padding: 0;
+  border: solid 4px $white;
+  // background-color: $white;
+  // color: $red;
+  margin: 0 1rem;
   &:hover {
-    border: solid 2px $white;
+    border: solid 4px $red;
   }
 }
 

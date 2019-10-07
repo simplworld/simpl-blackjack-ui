@@ -7,16 +7,39 @@ import styles from './ui.scss';
 
 class UI extends React.Component {
 
+  handleDeal = () => {
+    const { currentPeriod, submitDecision } = this.props;
+    submitDecision('deal', currentPeriod);
+  }
+
+  handleHit = () => {
+    const { currentPeriod, submitDecision } = this.props;
+    submitDecision('hit', currentPeriod);
+  }
+
+  handleStand = () => {
+    const { currentPeriod, submitDecision } = this.props;
+    submitDecision('stand', currentPeriod);
+  }
+
   render() {
+    const { submitDecision } = this.props;
     return (
       <div className={styles.container}>
         <Button
+          label="Deal"
+          circle
+          onClick={this.handleDeal}
+        />
+        <Button
           label="Hit"
-          className={styles.submitButton}
+          circle
+          onClick={this.handleHit}
         />
         <Button
           label="Stand"
-          className={styles.submitButton}
+          circle
+          onClick={this.handleStand}
         />
       </div>
     );

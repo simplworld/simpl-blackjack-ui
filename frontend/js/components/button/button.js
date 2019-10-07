@@ -21,7 +21,7 @@ export default class Button extends React.Component {
 
   render() {
     const {
-      label, submitting, inactive, hollow, white, disabled, className, onClick
+      label, submitting, inactive, hollow, circle, disabled, className, onClick
     } = this.props;
 
     let content = <div>{label}</div>;
@@ -35,8 +35,8 @@ export default class Button extends React.Component {
         className={classnames(
           styles.button, {
             [styles.inactive]: inactive,
+            [styles.circle]: circle,
             [styles.hollow]: hollow,
-            [styles.white]: white,
             [styles.disabled]: disabled,
             [styles.submitting]: submitting,
           },
@@ -44,6 +44,7 @@ export default class Button extends React.Component {
         )}
         onClick={this.handleClick}
         disabled={disabled}
+        type="submit"
       >
         {content}
       </button>
@@ -56,7 +57,6 @@ Button.propTypes = {
   inactive: PropTypes.bool,
   label: PropTypes.string,
   hollow: PropTypes.bool,
-  white: PropTypes.bool,
   href: PropTypes.string,
   submitting: PropTypes.bool,
   disabled: PropTypes.bool,

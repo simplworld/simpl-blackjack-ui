@@ -141,14 +141,15 @@
 }
 
 .cardEntering {
+  margin-left: 0px;
   &:nth-child(odd), &:nth-child(even) {
-    transform: translate3d(100vw, -70vh, 0);
+    transform: translate3d(50vw, -65vh, 0);
   }
 }
 
 .cardEntered {
   &:nth-child(odd), &:nth-child(even) {
-    transition: transform 0.4s cubic-bezier(0.16, 0.84, 0.32, 1.04);
+    transition: transform 0.4s cubic-bezier(0.16, 0.84, 0.32, 1.04), margin 0.4s cubic-bezier(0.16, 0.84, 0.32, 1.04);
     transition-delay: 0;
     transform: translate3d(0, 0, 0);
   }
@@ -172,20 +173,20 @@
       transition-delay: 0.1s + (0.15s * 3);
     }
   }
-  &:nth-child(3) {
-    transition-delay: 0.15s * 5;
-    .front,
-    .back {
-      transition-delay: 0.1s + (0.15s * 5);
-    }
-  }
-  &:nth-child(4) {
-    transition-delay: 0.15s * 7;
-    .front,
-    .back {
-      transition-delay: 0.1s + (0.15s * 7);
-    }
-  }
+  // &:nth-child(3) {
+  //   transition-delay: 0.15s * 5;
+  //   .front,
+  //   .back {
+  //     transition-delay: 0.1s + (0.15s * 5);
+  //   }
+  // }
+  // &:nth-child(4) {
+  //   transition-delay: 0.15s * 7;
+  //   .front,
+  //   .back {
+  //     transition-delay: 0.1s + (0.15s * 7);
+  //   }
+  // }
 }
 
 .cardEnteringFaceDown {
