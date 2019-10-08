@@ -39,6 +39,17 @@
   }
 }
 
+.small {
+  height: 50px;
+  width: 50px;
+  font-size: 11px;
+  background-color: #004785;
+  border: solid 2px $white;
+  &:hover {
+    border: solid 2px $red;
+  }
+}
+
 .inactive {
   opacity: 0.5;
   cursor: none;

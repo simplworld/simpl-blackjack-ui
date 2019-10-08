@@ -1,26 +1,16 @@
 .container {
-
   display: flex;
   flex-direction: row;
   z-index: 28;
   padding: 0 2rem 2rem 2rem;
   align-items: center;
   justify-content: center;
-  button {
-    // margin-bottom: 1rem;
-  }
 }
 
-
-.cardStack {
-  background-image: url(../../../assets/images/card-stack.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 192px;
-  height: 229px;
+.meta {
   position: absolute;
   top: 20px;
-  right: 20px;
-  z-index: 0;
+  left: 120px;
+  display: flex;
+  flex-direction: row;
 }

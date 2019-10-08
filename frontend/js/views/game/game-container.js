@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
-  import { submitDecision } from '../../actions/game';
+import { submitDecision } from '../../actions/game';
+import { logoutUser } from '../../actions/auth';
 
 import GameView from './game';
 
@@ -36,8 +37,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
-  console.log(ownProps);
   return {
+    logoutUser: () => dispatch(logoutUser()),
     submitDecision(action, currentPeriod) {
       dispatch(submitDecision(currentPeriod, action))
     }

@@ -60,7 +60,7 @@ class GameView extends React.Component {
 
   render() {
     const {
-      submitDecision, currentPeriod, data, runuser
+      submitDecision, currentPeriod, data, runuser, logoutUser
     } = this.props;
     console.log(this.props);
     // add a blank card on the dealer stack as long it is not his turn
@@ -96,6 +96,7 @@ class GameView extends React.Component {
         <UI
           currentPeriod={currentPeriod}
           submitDecision={submitDecision}
+          logoutUser={logoutUser}
         />
       </div>
     );

@@ -22,6 +22,15 @@ class UI extends React.Component {
     submitDecision('stand', currentPeriod);
   }
 
+  handleLogout = () => {
+    const { logoutUser } = this.props;
+    logoutUser();
+  }
+
+  handleShowHelp = () => {
+
+  }
+
   render() {
     const { submitDecision } = this.props;
     return (
@@ -41,6 +50,20 @@ class UI extends React.Component {
           circle
           onClick={this.handleStand}
         />
+        <div className={styles.meta}>
+          <Button
+            label="Logout"
+            circle
+            small
+            onClick={this.handleLogout}
+          />
+          <Button
+            label="Help"
+            circle
+            small
+            onClick={this.handleShowHelp}
+          />
+        </div>
       </div>
     );
   }
