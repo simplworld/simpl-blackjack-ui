@@ -78,3 +78,21 @@ $logo-height: 75px;
   transition: opacity 300ms ease-in;
 }
 
+// OVERLAY TRANSISTION
+:global(.overlay-enter) {
+  opacity: 0;
+}
+
+:global(.overlay-enter-active) {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+:global(.overlay-exit) {
+  opacity: 1;
+}
+
+:global(.overlay-exit-active) {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

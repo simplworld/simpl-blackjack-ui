@@ -11,7 +11,7 @@ class BoardView extends React.Component {
 
   render() {
     const { user } = this.props;
-
+    console.log('user', user);
     if (user) {
       const runs = user.runs.map((id) => `model:model.run.${id}`);
       const runusers = user.runusers.map((id) => `model:model.runuser.${id}`);

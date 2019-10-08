@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link, NavLink } from 'react-router-dom';
 
 import Button from '../../components/button/button';
 
@@ -63,6 +64,9 @@ class UI extends React.Component {
             small
             onClick={this.handleShowHelp}
           />
+          <Link to={{ pathname: '/help', state: { modal: true } }} >
+            test
+          </Link>
         </div>
       </div>
     );

@@ -17,25 +17,16 @@
   padding: 2rem 4rem;
   min-width: 300px;
   min-height: 200px;
-  max-width: 500px;
+  max-width: 800px;
   text-align: center;
   color: #fff;
   background-color: #004785;
   box-shadow: 0 0 45px rgba(0,0,0, 0.5);
-  z-index: 3;
-}
-
-.header {
-  h1 {
-    font-family:"Bourton W05 Drop Stripes A";
-    line-height: 44px;
-  }
-  span {
+  z-index: 9999;
+  h1, h3 {
     font-family:"Bourton W05 Drop Stripes A";
   }
-}
-
-.footer {
-  margin-top: 1rem;
-  font-size: 10px;
+  li {
+    list-style: none;
+  }
 }
