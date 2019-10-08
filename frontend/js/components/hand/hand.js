@@ -4,7 +4,6 @@ import {
   Transition,
   TransitionGroup,
 } from 'react-transition-group';
-import isEqual from 'lodash/isEqual';
 import classnames from 'classnames';
 
 import Card from '../card/card';
@@ -12,53 +11,37 @@ import Card from '../card/card';
 import styles from './hand.scss';
 
 
-class Hand extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cards: [],
-    };
+const Hand = (props) => {
+  const { cards, score, isPlayer, runuser } = props;
+
+  let username = 'Dealer';
+  if (isPlayer) {
+    username = runuser.email
   }
 
-  // componentDidUpdate(prevProps) {
-  //   const { cards } = this.props;
-  //   if (!isEqual(prevProps.cards, cards)) {
-  //     this.setState({
-  //       cards: cards
-  //     })
-  //   }
-  // }
-
-  render() {
-    const { cards, score, isPlayer, runuser } = this.props;
-
-    let username = 'Dealer';
-    if (isPlayer) {
-      username = runuser.email
-    }
-
-    return (
-      <div className={classnames(
-          styles.container, {
-            [styles.playerHand]: isPlayer,
-          })}
-      >
-        <div className={styles.username}>
-          {username}
+  return (
+    <div className={classnames(
+      styles.container, {
+        [styles.playerHand]: isPlayer,
+      }
+    )}
+    >
+      <div className={styles.username}>
+        {username}
+      </div>
+      <div className={styles.score}>
+        <div className={styles.scoreBaddge}>
+          {score}
         </div>
-        <div className={styles.score}>
-          <div className={styles.scoreBaddge}>
-            {score}
-          </div>
-        </div>
-        <div className={styles.cards}>
-          <TransitionGroup component={null}>
-            {cards.map((card, i) => (
-              <Transition
-                key={i}
-                timeout={800}
-                appear
-              >
+      </div>
+      <div className={styles.cards}>
+        <TransitionGroup component={null}>
+          {cards.map((card, i) => (
+            <Transition
+              key={i}
+              timeout={800}
+              appear
+            >
               {state => (
                 <Card
                   key={card.rank + card.suit}
@@ -68,14 +51,13 @@ class Hand extends React.Component {
                   transitionState={state}
                 />
               )}
-              </Transition>
-            ))}
-          </TransitionGroup>
-        </div>
+            </Transition>
+          ))}
+        </TransitionGroup>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Hand.propTypes = {
 };

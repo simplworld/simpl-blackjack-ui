@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { Spinner } from 'react-redux-spinner';
 import 'react-redux-spinner/dist/react-redux-spinner.css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -32,9 +31,6 @@ class Routes extends React.Component {
           && props.location.state.modal
           && this.previousLocation !== props.location
         );
-        console.log('isModal', isModal)
-        console.log('previousLocation', this.previousLocation)
-        console.log('props.location', props.location)
         return (
           <React.Fragment>
             <TransitionGroup component={null}>

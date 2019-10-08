@@ -1,4 +1,4 @@
-import { SHOW_MAP, HIDE_MAP } from '../actions/ui';
+import { SHOW_MODAL, HIDE_MODAL } from '../actions/ui';
 
 const initialState = {
   showMap: false
@@ -6,15 +6,15 @@ const initialState = {
 
 const map = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_MAP:
+    case SHOW_MODAL:
       return {
         ...state,
-        showMap: true,
+        showModal: true,
       };
-    case HIDE_MAP:
+    case HIDE_MODAL:
       return {
         ...state,
-        showMap: false,
+        showModal: false,
       };
     default:
       return state;

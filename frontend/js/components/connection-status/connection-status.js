@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {CONNECTION_STATUS} from 'simpl-react/lib/constants'
+import { CONNECTION_STATUS } from 'simpl-react/lib/constants';
 
 
 function ConnectionStatus(props) {
@@ -16,8 +16,10 @@ function ConnectionStatus(props) {
     );
   } else if (props.connectionStatus === CONNECTION_STATUS.OFFLINE) {
     content = (
-      <p> Connection lost.
-        If the problem persists, please contact the administrator..</p>
+      <p>
+        Connection lost.
+        If the problem persists, please contact the administrator.
+      </p>
     );
   }
   return (
@@ -32,4 +34,3 @@ ConnectionStatus.propTypes = {
 };
 
 export default ConnectionStatus;
-

@@ -38,7 +38,6 @@ class Card extends React.Component {
 
   render() {
     const { faceDown, suit, transitionState } = this.props;
-    console.log(transitionState)
     const cardClasses = classNames(
       styles.card,
       {
@@ -69,12 +68,14 @@ Card.propTypes = {
   rank: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ])
+  ]),
+  transitionState: PropTypes.string
 };
 
 Card.defaultProps = {
   faceDown: true,
-  rank: null
+  rank: null,
+  transitionState: ''
 };
 
 export default Card;

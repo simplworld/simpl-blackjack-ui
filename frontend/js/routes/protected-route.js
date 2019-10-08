@@ -4,16 +4,14 @@ import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router';
 
 
-class ProtectedRoute extends React.Component {
-  render() {
-    if (!this.props.allowed) {
-      return <Redirect to="/login" />;
-    }
-    return (
-      <Route {...this.props} />
-    );
+const ProtectedRoute = (props) => {
+  if (!props.allowed) {
+    return <Redirect to="/login" />;
   }
-}
+  return (
+    <Route {...props} />
+  );
+};
 
 ProtectedRoute.propTypes = {
   allowed: PropTypes.bool.isRequired,

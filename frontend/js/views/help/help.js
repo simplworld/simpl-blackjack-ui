@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router';
 
 import Button from '../../components/button/button';
 
@@ -8,13 +7,12 @@ import styles from './help.scss';
 
 
 class Help extends React.Component {
-
   handleClose = () => {
-    this.props.history.goBack();
+    const { history } = this.props;
+    history.goBack();
   }
 
   render() {
-
     return (
       <div className={styles.container}>
         <div className={styles.window}>
@@ -62,7 +60,8 @@ class Help extends React.Component {
               Players decide whether to “stand” (no more cards) or “hit” (ask for another card)
             </li>
             <li>
-              If Dealer’s hand is 16 or less, and Player’s hand is less than 21, Dealer must take card
+              If Dealer’s hand is 16 or less, and Player’s hand is less than 21,
+              Dealer must take card
             </li>
           </ul>
           <h3>
@@ -79,8 +78,7 @@ class Help extends React.Component {
           <div className={styles.actions}>
             <Button
               label="Start"
-              //onClick={() => this.props.history.push('/login')}
-              onClick={() => this.props.history.goBack()}
+              onClick={() => history.goBack()}
             />
           </div>
         </div>
@@ -91,6 +89,5 @@ class Help extends React.Component {
 
 Help.propTypes = {
 };
-
 
 export default Help;

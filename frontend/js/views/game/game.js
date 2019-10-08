@@ -8,61 +8,14 @@ import Divider from '../../components/divider/divider';
 
 import styles from './game.scss';
 
-// const ranks = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
-// const suits = ['H', 'S', 'C', 'D'];
-
-const dealerCards = [
-  {
-    rank: '9',
-    suit: 'H'
-  },
-  {
-    rank: '10',
-    suit: 'S'
-  },
-  {
-    rank: 'A',
-    suit: 'S'
-  },
-  {
-    rank: null,
-    suit: 'D'
-  },
-];
-
-const playerCards = [
-  {
-    rank: '4',
-    suit: 'S'
-  },
-  {
-    rank: 'A',
-    suit: 'D'
-  },
-  {
-    rank: 'J',
-    suit: 'D'
-  },
-  {
-    rank: '2',
-    suit: 'C'
-  },
-];
 
 class GameView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      height: 0,
-      widht: 0,
-    };
-  }
 
   render() {
     const {
       submitDecision, currentPeriod, data, runuser, logoutUser
     } = this.props;
-    console.log(this.props);
+
     // add a blank card on the dealer stack as long it is not his turn
     let dealer_cards = data.dealer_cards
     if (!data.player_done) {
@@ -106,5 +59,5 @@ class GameView extends React.Component {
 GameView.propTypes = {
 };
 
-export default GameView
+export default GameView;
 

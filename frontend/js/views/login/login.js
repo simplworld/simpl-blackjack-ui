@@ -11,59 +11,55 @@ import TextField from '../../components/forms/textfield/textfield';
 import styles from './login.scss';
 
 
-class Login extends React.Component {
+const Login = (props) => {
+  const {
+    handleSubmit, loggedIn, isValid, isSubmitting, user,
+  } = props;
 
-  render() {
-    const {
-      errors, handleSubmit, loggedIn, isValid, isSubmitting, user, t
-    } = this.props;
-
-    if (loggedIn && user) {
-      return <Redirect to="/game" />;
-    }
-
-    return (
-      <div className={styles.container}>
-        <div className={styles.modal}>
-          <form className={styles.form}>
-            <div className={styles.fields}>
-              <TextField
-                name="email"
-                type="text"
-                label="Email address"
-                placeholder="Enter your email address"
-                className="form-control"
-                required
-              />
-              <TextField
-                id="password"
-                name="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
-                className="form-control"
-                required
-              />
-            </div>
-            <div className={styles.actions}>
-              <Button
-                label="Login"
-                className={styles.submitButton}
-                onClick={handleSubmit}
-                disabled={!isValid}
-                submitting={isSubmitting}
-              />
-            </div>
-          </form>
-        </div>
-      </div>
-    );
+  if (loggedIn && user) {
+    return <Redirect to="/game" />;
   }
-}
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.modal}>
+        <form className={styles.form}>
+          <div className={styles.fields}>
+            <TextField
+              name="email"
+              type="text"
+              label="Email address"
+              placeholder="Enter your email address"
+              className="form-control"
+              required
+            />
+            <TextField
+              id="password"
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="Enter your password"
+              className="form-control"
+              required
+            />
+          </div>
+          <div className={styles.actions}>
+            <Button
+              label="Login"
+              className={styles.submitButton}
+              onClick={handleSubmit}
+              disabled={!isValid}
+              submitting={isSubmitting}
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  errors: PropTypes.shape({}).isRequired,
   loggedIn: PropTypes.bool.isRequired,
 };
 

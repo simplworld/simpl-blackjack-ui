@@ -40,7 +40,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     logoutUser: () => dispatch(logoutUser()),
     submitDecision(action, currentPeriod) {
-      dispatch(submitDecision(currentPeriod, action))
+      dispatch(submitDecision(currentPeriod, action));
     }
   };
 }
@@ -51,4 +51,3 @@ const GameContainer = connect(
 )(GameView);
 
 export default GameContainer;
-
