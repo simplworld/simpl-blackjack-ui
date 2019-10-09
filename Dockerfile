@@ -1,6 +1,6 @@
 FROM python:3.6
 
-LABEL Description="Image for simpl-calc-ui" Vendor="Wharton" Version="0.1.0"
+LABEL Description="Image for simpl-blackjack-ui" Vendor="Wharton" Version="0.1.0"
 
 ENV PYTHONUNBUFFERED 1
 
@@ -45,4 +45,4 @@ RUN eval "$(ssh-agent -s)" \
 ENV MODEL_SERVICE_WS ws://model:8080/ws
 
 EXPOSE 8000
-CMD python check_modelservice.py && gunicorn simpl_calc_ui.wsgi -b 0.0.0.0:8000
+CMD python check_modelservice.py && gunicorn simpl_blackjack_ui.wsgi -b 0.0.0.0:8000

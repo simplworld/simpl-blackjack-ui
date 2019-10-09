@@ -1,6 +1,6 @@
 # simpl-blackjack-ui - example blackjack game.
 
-## Python Setup (assumes Python == 3.6, simpl-games-api and simpl-calc-model servers running)
+## Python Setup (assumes Python == 3.6, simpl-games-api and simpl-blackjack-model servers running)
 
 ```shell
 $ create a virtual enviroment and activate it

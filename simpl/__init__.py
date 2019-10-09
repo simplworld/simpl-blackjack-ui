@@ -4,7 +4,7 @@ from django.conf import settings
 
 from simpl_client import GamesAPIClient
 
-from simpl_calc_ui.asyncio import coro
+from simpl_blackjack_ui.asyncio import coro
 
 CALLBACK_URL = getattr(settings, 'CALLBACK_URL',
                        'http://{hostname}:{port}/api/callback')

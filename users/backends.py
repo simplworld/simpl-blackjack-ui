@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 from simpl_client import GamesAPIClient
 
-from simpl_calc_ui.asyncio import coro
+from simpl_blackjack_ui.asyncio import coro
 
 
 def payload_to_attrs(payload):
