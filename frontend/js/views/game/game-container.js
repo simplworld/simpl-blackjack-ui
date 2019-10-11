@@ -65,6 +65,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     logoutUser: () => dispatch(logoutUser()),
+    startNewGame(currentPeriod) {
+      if (!currentPeriod) {
+        return;
+      }
+      dispatch(submitDecision(currentPeriod));
+    },
     submitDecision(action, currentPeriod) {
       if (!currentPeriod) {
         return;

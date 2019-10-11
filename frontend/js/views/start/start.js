@@ -26,9 +26,6 @@ class Start extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.window}>
-          <Link to={{ pathname: '/help', state: { modal: true } }} >
-            test
-          </Link>
           <div className={styles.header}>
             <span>Welcome to:</span>
             <h1>Simpl Blackjack</h1>
@@ -37,6 +34,13 @@ class Start extends React.Component {
             This Blackjack game has been built on Simpl. Simpl is an
             open-source simulation platform created by Wharton's Learning Lab.
           </p>
+          <Link
+            to={{ pathname: '/help', state: { modal: true } }}
+            className={styles.rulesLink}
+          >
+            The Rules
+          </Link>
+          <hr/>
           <div className={styles.actions}>
             <Button
               label="Start"

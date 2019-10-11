@@ -8,8 +8,11 @@ import styles from './rules.scss';
 
 class Rules extends React.Component {
   handleClose = () => {
-    const { showHelp } = this.props;
-    showHelp(false);
+    const { showHelp, history } = this.props;
+    if (showHelp) {
+      showHelp(false);
+    }
+    history.goBack();
   }
 
   render() {
@@ -72,7 +75,7 @@ class Rules extends React.Component {
               The winner has a hand count closest to or exactly 21, but not more than 21
             </li>
             <li>
-              If Dealer and Player have the same score, the game is tied—Player can “Start New Game”
+              If Dealer and Player have the same score, the game is tied—Player can <b>Start New Game</b>
             </li>
           </ul>
           <div className={styles.actions}>

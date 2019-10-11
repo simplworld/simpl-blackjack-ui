@@ -43,9 +43,9 @@ class Modal extends React.Component {
 
     const content = (
       <React.Fragment>
-        {text}
+        <h1>{text}</h1>
         <Button
-          label="Deal"
+          label="Start"
           circle
           onClick={this.handleDeal}
         />
@@ -53,33 +53,11 @@ class Modal extends React.Component {
     );
 
     return (
-      <CSSTransition
-        in={showModal}
-        timeout={800}
-        // unmountOnExit
-        // onEnter={}
-        // onExited={}
-      >
-        {state => (
-          <div
-            styles={state}
-            className={
-              classnames(
-                styles.container,
-                {
-                  [styles.enter]: state === 'entering' || state === 'appear',
-                  [styles.enterActive]: state === 'entered'  || state === 'appeared',
-                  [styles.exit]: state === 'exiting',
-                  [styles.exitActive]: state === 'exited',
-                }
-              )}
-          >
-            <div className={styles.window}>
-              {content}
-            </div>
-          </div>
-        )}
-      </CSSTransition>
+      <div className={styles.container}>
+        <div className={styles.window}>
+          {content}
+        </div>
+      </div>
     );
   }
 }

@@ -25,7 +25,6 @@ class GameView extends React.Component {
   }
 
   showHelp = (bool) => {
-    console.log('help ->', bool);
     this.setState({
       showHelp: bool
     });
@@ -33,12 +32,12 @@ class GameView extends React.Component {
 
   render() {
     const {
-      submitDecision, currentPeriod, data, runuser, logoutUser
+      submitDecision, currentPeriod, data, runuser, logoutUser, startNewGame
     } = this.props;
 
     // add a blank card on the dealer stack as long it is not his turn
     let dealer_cards = data.dealer_cards
-
+    console.log(data)
     if (data.dealer_cards.length === 1) {
       const dummyCard = [{rank: 'blank',  suit: ''}]
       dealer_cards = data.dealer_cards.concat(dummyCard);
@@ -60,9 +59,10 @@ class GameView extends React.Component {
         push={data.push}
         currentPeriod={currentPeriod}
         submitDecision={submitDecision}
+        startNewGame={startNewGame}
       />
     );
-    console.log(data.dealer_cards.length)
+
     let dings = '';
     if (data.dealer_cards.length === 0) {
       dings =(
@@ -74,11 +74,10 @@ class GameView extends React.Component {
           start
           currentPeriod={currentPeriod}
           submitDecision={submitDecision}
+          startNewGame={startNewGame}
         />
       );
     }
-
-    console.log('gameData', data);
 
     return (
       <div className={styles.container}>
@@ -93,14 +92,14 @@ class GameView extends React.Component {
           isPlayer
           runuser={runuser}
         />
-
         <UI
           showHelp={() => this.toggleHelp()}
           currentPeriod={currentPeriod}
           submitDecision={submitDecision}
+          startNewGame={startNewGame}
           logoutUser={logoutUser}
         />
-        {modal}
+        {showModal && modal}
         {dings}
         {this.state.showHelp && help}
       </div>
@@ -112,4 +111,3 @@ GameView.propTypes = {
 };
 
 export default GameView;
-

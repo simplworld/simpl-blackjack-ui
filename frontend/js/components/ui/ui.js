@@ -11,6 +11,7 @@ class UI extends React.Component {
   handleNew = () => {
     const { currentPeriod, submitDecision } = this.props;
     submitDecision('new', currentPeriod);
+    submitDecision('deal', currentPeriod);
   }
 
   handleDeal = () => {
@@ -43,16 +44,19 @@ class UI extends React.Component {
     const { submitDecision } = this.props;
     return (
       <div className={styles.container}>
+
         <Button
           label="New"
           circle
           onClick={this.handleNew}
         />
+        {/*
         <Button
           label="Deal"
           circle
           onClick={this.handleDeal}
         />
+        */}
         <Button
           label="Hit"
           circle
