@@ -11,7 +11,6 @@ class UI extends React.Component {
   handleNew = () => {
     const { currentPeriod, submitDecision } = this.props;
     submitDecision('new', currentPeriod);
-    submitDecision('deal', currentPeriod);
   }
 
   handleDeal = () => {

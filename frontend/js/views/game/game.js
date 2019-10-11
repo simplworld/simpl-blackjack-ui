@@ -36,11 +36,10 @@ class GameView extends React.Component {
     } = this.props;
 
     // add a blank card on the dealer stack as long it is not his turn
-    let dealer_cards = data.dealer_cards
-    console.log(data)
+    let dealerCards = data.dealer_cards;
     if (data.dealer_cards.length === 1) {
       const dummyCard = [{rank: 'blank',  suit: ''}]
-      dealer_cards = data.dealer_cards.concat(dummyCard);
+      dealerCards = data.dealer_cards.concat(dummyCard);
     }
 
     let showModal = false;
@@ -82,7 +81,7 @@ class GameView extends React.Component {
     return (
       <div className={styles.container}>
         <Hand
-          cards={dealer_cards}
+          cards={dealerCards}
           score={data.dealer_score}
         />
         <Divider />
@@ -108,6 +107,23 @@ class GameView extends React.Component {
 }
 
 GameView.propTypes = {
+  submitDecision: PropTypes.func.isRequired,
+  currentPeriod: PropTypes.shape().isRequired,
+  data: PropTypes.shape(),
+};
+
+GameView.defaultProps = {
+  data: {
+    deck: [],
+    player_cards: [],
+    dealer_cards: [],
+    player_score: 0,
+    dealer_score: 0,
+    player_busted: false,
+    dealer_busted: false,
+    push: false,
+    player_done: false
+  }
 };
 
 export default GameView;

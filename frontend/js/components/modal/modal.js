@@ -1,9 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import {
-  CSSTransition,
-} from 'react-transition-group';
 
 import Button from '../button/button';
 
@@ -24,7 +20,7 @@ class Modal extends React.Component {
 
   render() {
     const {
-      showModal, playerBusted, dealerBusted, push, start
+      playerBusted, dealerBusted, push, start
     } = this.props;
 
     let text = '';
@@ -63,9 +59,19 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
+  submitDecision: PropTypes.func.isRequired,
+  currentPeriod: PropTypes.shape().isRequired,
+  dealerBusted: PropTypes.bool,
+  playerBusted: PropTypes.bool,
+  push: PropTypes.bool,
+  start: PropTypes.bool
 };
 
 Modal.defaultProps = {
+  dealerBusted: false,
+  playerBusted: false,
+  push: false,
+  start: false
 };
 
 export default Modal;
