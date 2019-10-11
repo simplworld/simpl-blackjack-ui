@@ -5,6 +5,8 @@ import {
   TransitionGroup,
 } from 'react-transition-group';
 import classnames from 'classnames';
+import { AnimateOnChange } from 'react-animation';
+
 
 import Card from '../card/card';
 
@@ -31,7 +33,12 @@ const Hand = (props) => {
       </div>
       <div className={styles.score}>
         <div className={styles.scoreBaddge}>
-          {score}
+          <AnimateOnChange
+            animationIn="bounceIn"
+            animationOut="bounceOut"
+          >
+            {score}
+          </AnimateOnChange>
         </div>
       </div>
       <div className={styles.cards}>
