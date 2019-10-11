@@ -41,8 +41,8 @@ class Modal extends React.Component {
       <React.Fragment>
         <h1>{text}</h1>
         <Button
-          label="Start"
-          circle
+          label="Start New Game!"
+          rounded
           onClick={this.handleDeal}
         />
       </React.Fragment>

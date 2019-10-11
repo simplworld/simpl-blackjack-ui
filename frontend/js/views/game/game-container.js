@@ -10,30 +10,25 @@ import GameView from './game';
 
 function mapStateToProps(state) {
   const runuser = state.simpl.current_runuser;
-
   const scenarios = state.simpl.scenario.filter(
     (s) => runuser.id === s.runuser
   );
-
-  console.log(scenarios);
   const sorted_scenarios = _.sortBy(scenarios, (s) => s.created);
-
   const scenario = sorted_scenarios[sorted_scenarios.length - 1];
-
   const unsortedPeriods = state.simpl.period.filter(
     (p) => scenario.id === p.scenario
   );
 
   let data = {
-    'deck': [],
-    'player_cards': [],
-    'dealer_cards': [],
-    'player_score': 0,
-    'dealer_score': 0,
-    'player_busted': false,
-    'dealer_busted': false,
-    'push': false,
-    'player_done': false
+    deck: [],
+    player_cards: [],
+    dealer_cards: [],
+    player_score: 0,
+    dealer_score: 0,
+    player_busted: false,
+    dealer_busted: false,
+    push: false,
+    player_done: false
   };
   let currentPeriod = null;
 
@@ -43,8 +38,7 @@ function mapStateToProps(state) {
     const periods = _.sortBy(unsortedPeriods, (p) => p.order);
     const periodOrder = _.last(periods).order;
 
-    // let data = {};
-    if (periodOrder > 1) { // pull total from last result
+    if (periodOrder > 1) {
       const lastPeriod = periods[periodOrder - 2];
       const lastResult = state.simpl.result.find(
         (s) => lastPeriod.id === s.period
@@ -65,12 +59,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     logoutUser: () => dispatch(logoutUser()),
-    startNewGame(currentPeriod) {
-      if (!currentPeriod) {
-        return;
-      }
-      dispatch(submitDecision(currentPeriod));
-    },
     submitDecision(action, currentPeriod) {
       if (!currentPeriod) {
         return;

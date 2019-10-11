@@ -19,9 +19,15 @@ $logo-height: 149px;
   display: flex;
   flex: 0 auto;
   padding: 3rem 4rem 4rem 4rem;
-  background-color: #fff;
+  background-color: #004785;
   z-index: 4;
   box-shadow: 0px 11px 54px 0px rgba(0,0,0,0.83);
+  label {
+    color: #fff;
+  }
+  .input-error {
+    color: #fff;
+  }
 }
 
 .fields {

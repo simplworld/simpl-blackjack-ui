@@ -1,21 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
 
-import Button from '../../components/button/button';
+import Button from '../button/button';
 
 import styles from './ui.scss';
 
-class UI extends React.Component {
 
+class UI extends React.Component {
   handleNew = () => {
     const { currentPeriod, submitDecision } = this.props;
     submitDecision('new', currentPeriod);
-  }
-
-  handleDeal = () => {
-    const { currentPeriod, submitDecision } = this.props;
-    submitDecision('deal', currentPeriod);
   }
 
   handleHit = () => {
@@ -40,22 +34,14 @@ class UI extends React.Component {
   }
 
   render() {
-    const { submitDecision } = this.props;
     return (
       <div className={styles.container}>
-        {/*
         <Button
-          label="New"
+          label="Fold"
           circle
+          small
           onClick={this.handleNew}
         />
-
-        <Button
-          label="Deal"
-          circle
-          onClick={this.handleDeal}
-        />
-        */}
         <Button
           label="Hit"
           circle
@@ -79,11 +65,6 @@ class UI extends React.Component {
             small
             onClick={this.handleShowHelp}
           />
-          {/*}
-          <Link to={{ pathname: '/help', state: { modal: true } }} >
-            test
-          </Link>
-          */}
         </div>
       </div>
     );
@@ -91,6 +72,14 @@ class UI extends React.Component {
 }
 
 UI.propTypes = {
+  currentPeriod: PropTypes.shape().isRequired,
+  logoutUser: PropTypes.func.isRequired,
+  submitDecision: PropTypes.func.isRequired,
+  showHelp: PropTypes.func.isRequired,
+};
+
+UI.defaultProps = {
+
 };
 
 export default UI;

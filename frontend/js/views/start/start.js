@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Button from '../../components/button/button';
 
@@ -9,14 +9,14 @@ import styles from './start.scss';
 
 
 class Start extends React.Component {
-
   handleClose = () => {
-    this.props.history.goBack();
+    const { history } = this.props;
+    history.goBack();
   }
 
   render() {
     const {
-      errors, handleSubmit, loggedIn, isValid, isSubmitting, user, t
+      loggedIn, user, history
     } = this.props;
 
     if (loggedIn && user) {
@@ -31,8 +31,7 @@ class Start extends React.Component {
             <h1>Simpl Blackjack</h1>
           </div>
           <p>
-            This Blackjack game has been built on Simpl. Simpl is an
-            open-source simulation platform created by Wharton's Learning Lab.
+            {'This Blackjack game has been built on Simpl. Simpl is an open-source simulation platform created by Wharton\'s Learning Lab.'}
           </p>
           <Link
             to={{ pathname: '/help', state: { modal: true } }}
@@ -40,11 +39,11 @@ class Start extends React.Component {
           >
             The Rules
           </Link>
-          <hr/>
+          <hr />
           <div className={styles.actions}>
             <Button
               label="Start"
-              onClick={() => this.props.history.push('/game')}
+              onClick={() => history.push('/game')}
             />
           </div>
           <div className={styles.footer}>
@@ -61,7 +60,16 @@ class Start extends React.Component {
 }
 
 Start.propTypes = {
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+  loggedIn: PropTypes.bool,
+  user: PropTypes.shape(),
 };
 
+Start.defaultProps = {
+  loggedIn: false,
+  user: null
+};
 
 export default Start;

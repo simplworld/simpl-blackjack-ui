@@ -39,6 +39,21 @@
   }
 }
 
+.rounded {
+  border-radius: 20px;
+  width: auto;
+  height: 80px;
+
+  padding: 0 2rem;
+  border: solid 4px $white;
+  // background-color: $white;
+  // color: $red;
+  margin: 0 1rem;
+  &:hover {
+    border: solid 4px $red;
+  }
+}
+
 .small {
   height: 50px;
   width: 50px;

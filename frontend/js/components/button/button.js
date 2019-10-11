@@ -21,7 +21,7 @@ export default class Button extends React.Component {
 
   render() {
     const {
-      label, submitting, inactive, hollow, circle, small,
+      label, submitting, inactive, rounded, circle, small,
       disabled, className, onClick
     } = this.props;
 
@@ -38,7 +38,7 @@ export default class Button extends React.Component {
             [styles.inactive]: inactive,
             [styles.circle]: circle,
             [styles.small]: small,
-            [styles.hollow]: hollow,
+            [styles.rounded]: rounded,
             [styles.disabled]: disabled,
             [styles.submitting]: submitting,
           },

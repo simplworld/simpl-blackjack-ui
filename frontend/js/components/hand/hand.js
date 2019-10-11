@@ -14,11 +14,13 @@ import styles from './hand.scss';
 
 
 const Hand = (props) => {
-  const { cards, score, isPlayer, runuser } = props;
+  const {
+    cards, score, isPlayer
+  } = props;
 
   let username = 'Dealer';
   if (isPlayer) {
-    username = 'You' //username = runuser.email
+    username = 'You'; // username = runuser.email
   }
 
   return (
@@ -67,6 +69,13 @@ const Hand = (props) => {
 };
 
 Hand.propTypes = {
+  isPlayer: PropTypes.bool,
+  cards: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  score: PropTypes.number.isRequired,
+};
+
+Hand.defaultProps = {
+  isPlayer: false
 };
 
 export default Hand;

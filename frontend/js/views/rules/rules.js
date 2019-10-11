@@ -11,8 +11,9 @@ class Rules extends React.Component {
     const { showHelp, history } = this.props;
     if (showHelp) {
       showHelp(false);
+    } else {
+      history.goBack();
     }
-    history.goBack();
   }
 
   render() {
@@ -75,7 +76,8 @@ class Rules extends React.Component {
               The winner has a hand count closest to or exactly 21, but not more than 21
             </li>
             <li>
-              If Dealer and Player have the same score, the game is tied—Player can <b>Start New Game</b>
+              If Dealer and Player have the same score, the game is tied—Player can
+              <b>Start New Game</b>
             </li>
           </ul>
           <div className={styles.actions}>
@@ -91,6 +93,15 @@ class Rules extends React.Component {
 }
 
 Rules.propTypes = {
+  history: PropTypes.shape({
+    goBack: PropTypes.func,
+  }),
+  showHelp: PropTypes.func
+};
+
+Rules.defaultProps = {
+  history: null,
+  showHelp: null
 };
 
 export default Rules;

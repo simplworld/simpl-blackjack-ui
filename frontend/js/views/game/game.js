@@ -27,8 +27,9 @@ class GameView extends React.Component {
   }
 
   toggleHelp = () => {
+    const { showHelp } = this.state;
     this.setState({
-      showHelp: !this.state.showHelp
+      showHelp: !showHelp
     });
   }
 
@@ -40,25 +41,25 @@ class GameView extends React.Component {
 
   render() {
     const {
-      submitDecision, currentPeriod, data, runuser, logoutUser, startNewGame
+      submitDecision, currentPeriod, data, runuser, logoutUser
     } = this.props;
+    const { showHelp } = this.state;
 
     // add a blank card on the dealer stack as long it is not his turn
     let dealerCards = data.dealer_cards;
     if (data.dealer_cards.length === 1) {
-      const dummyCard = [{rank: 'blank',  suit: ''}]
+      const dummyCard = [{ rank: 'blank', suit: '' }];
       dealerCards = data.dealer_cards.concat(dummyCard);
     }
 
     let showModal = false;
-
     if (data.player_busted || data.dealer_busted || data.push) {
       showModal = true;
     }
 
     const help = <Rules showHelp={() => this.toggleHelp()} />;
 
-    let modal = (
+    const modal = (
       <Modal
         showModal={showModal}
         playerBusted={data.player_busted}
@@ -66,25 +67,8 @@ class GameView extends React.Component {
         push={data.push}
         currentPeriod={currentPeriod}
         submitDecision={submitDecision}
-        startNewGame={startNewGame}
       />
     );
-
-    let dings = '';
-    // if (data.dealer_cards.length === 0) {
-    //   dings =(
-    //     <Modal
-    //       showModal={true}
-    //       playerBusted={data.player_busted}
-    //       dealerBusted={data.dealer_busted}
-    //       push={data.push}
-    //       start
-    //       currentPeriod={currentPeriod}
-    //       submitDecision={submitDecision}
-    //       startNewGame={startNewGame}
-    //     />
-    //   );
-    // }
 
     return (
       <div className={styles.container}>
@@ -103,12 +87,10 @@ class GameView extends React.Component {
           showHelp={() => this.toggleHelp()}
           currentPeriod={currentPeriod}
           submitDecision={submitDecision}
-          startNewGame={startNewGame}
           logoutUser={logoutUser}
         />
         {showModal && modal}
-        {dings}
-        {this.state.showHelp && help}
+        {showHelp && help}
       </div>
     );
   }
@@ -118,6 +100,8 @@ GameView.propTypes = {
   submitDecision: PropTypes.func.isRequired,
   currentPeriod: PropTypes.shape().isRequired,
   data: PropTypes.shape(),
+  logoutUser: PropTypes.func.isRequired,
+  runuser: PropTypes.shape(),
 };
 
 GameView.defaultProps = {
@@ -131,7 +115,8 @@ GameView.defaultProps = {
     dealer_busted: false,
     push: false,
     player_done: false
-  }
+  },
+  runuser: {}
 };
 
 export default GameView;
