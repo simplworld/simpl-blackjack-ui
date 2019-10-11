@@ -18,6 +18,14 @@ class GameView extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    // dirty approach do deal new cards after initializing a new game
+    const { data, currentPeriod, submitDecision } = this.props;
+    if (data.player_cards.length === 0) {
+      submitDecision('deal', currentPeriod);
+    }
+  }
+
   toggleHelp = () => {
     this.setState({
       showHelp: !this.state.showHelp
@@ -63,20 +71,20 @@ class GameView extends React.Component {
     );
 
     let dings = '';
-    if (data.dealer_cards.length === 0) {
-      dings =(
-        <Modal
-          showModal={true}
-          playerBusted={data.player_busted}
-          dealerBusted={data.dealer_busted}
-          push={data.push}
-          start
-          currentPeriod={currentPeriod}
-          submitDecision={submitDecision}
-          startNewGame={startNewGame}
-        />
-      );
-    }
+    // if (data.dealer_cards.length === 0) {
+    //   dings =(
+    //     <Modal
+    //       showModal={true}
+    //       playerBusted={data.player_busted}
+    //       dealerBusted={data.dealer_busted}
+    //       push={data.push}
+    //       start
+    //       currentPeriod={currentPeriod}
+    //       submitDecision={submitDecision}
+    //       startNewGame={startNewGame}
+    //     />
+    //   );
+    // }
 
     return (
       <div className={styles.container}>

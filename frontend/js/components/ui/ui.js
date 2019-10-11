@@ -43,13 +43,13 @@ class UI extends React.Component {
     const { submitDecision } = this.props;
     return (
       <div className={styles.container}>
-
+        {/*
         <Button
           label="New"
           circle
           onClick={this.handleNew}
         />
-        {/*
+
         <Button
           label="Deal"
           circle

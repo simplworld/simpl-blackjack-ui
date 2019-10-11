@@ -15,7 +15,7 @@ class Modal extends React.Component {
 
   handleDeal = () => {
     const { currentPeriod, submitDecision } = this.props;
-    submitDecision('deal', currentPeriod);
+    submitDecision('new', currentPeriod);
   }
 
   render() {
