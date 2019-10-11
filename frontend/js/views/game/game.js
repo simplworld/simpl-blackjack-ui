@@ -5,11 +5,31 @@ import Hand from '../../components/hand/hand';
 import UI from '../../components/ui/ui';
 import Modal from '../../components/modal/modal';
 import Divider from '../../components/divider/divider';
+import Rules from '../rules/rules';
 
 import styles from './game.scss';
 
 
 class GameView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showHelp: false,
+    };
+  }
+
+  toggleHelp = () => {
+    this.setState({
+      showHelp: !this.state.showHelp
+    });
+  }
+
+  showHelp = (bool) => {
+    console.log('help ->', bool);
+    this.setState({
+      showHelp: bool
+    });
+  }
 
   render() {
     const {
@@ -18,15 +38,48 @@ class GameView extends React.Component {
 
     // add a blank card on the dealer stack as long it is not his turn
     let dealer_cards = data.dealer_cards
-    if (!data.player_done) {
+
+    if (data.dealer_cards.length === 1) {
       const dummyCard = [{rank: 'blank',  suit: ''}]
-      dealer_cards = data.dealer_cards.concat(dummyCard)
+      dealer_cards = data.dealer_cards.concat(dummyCard);
     }
 
     let showModal = false;
+
     if (data.player_busted || data.dealer_busted || data.push) {
       showModal = true;
     }
+
+    const help = <Rules showHelp={() => this.toggleHelp()} />;
+
+    let modal = (
+      <Modal
+        showModal={showModal}
+        playerBusted={data.player_busted}
+        dealerBusted={data.dealer_busted}
+        push={data.push}
+        currentPeriod={currentPeriod}
+        submitDecision={submitDecision}
+      />
+    );
+    console.log(data.dealer_cards.length)
+    let dings = '';
+    if (data.dealer_cards.length === 0) {
+      dings =(
+        <Modal
+          showModal={true}
+          playerBusted={data.player_busted}
+          dealerBusted={data.dealer_busted}
+          push={data.push}
+          start
+          currentPeriod={currentPeriod}
+          submitDecision={submitDecision}
+        />
+      );
+    }
+
+    console.log('gameData', data);
+
     return (
       <div className={styles.container}>
         <Hand
@@ -40,17 +93,16 @@ class GameView extends React.Component {
           isPlayer
           runuser={runuser}
         />
-        <Modal
-          showModal={showModal}
-          playerBusted={data.player_busted}
-          dealerBusted={data.dealer_busted}
-          push={data.push}
-        />
+
         <UI
+          showHelp={() => this.toggleHelp()}
           currentPeriod={currentPeriod}
           submitDecision={submitDecision}
           logoutUser={logoutUser}
         />
+        {modal}
+        {dings}
+        {this.state.showHelp && help}
       </div>
     );
   }

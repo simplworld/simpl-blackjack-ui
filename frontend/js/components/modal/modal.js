@@ -5,6 +5,8 @@ import {
   CSSTransition,
 } from 'react-transition-group';
 
+import Button from '../button/button';
+
 import styles from './modal.scss';
 
 
@@ -15,23 +17,41 @@ class Modal extends React.Component {
     };
   }
 
+  handleDeal = () => {
+    const { currentPeriod, submitDecision } = this.props;
+    submitDecision('deal', currentPeriod);
+  }
+
   render() {
     const {
-      showModal, playerBusted, dealerBusted, push
+      showModal, playerBusted, dealerBusted, push, start
     } = this.props;
-    let content = ''
 
-    console.log('playerBusted', playerBusted)
-    console.log('dealerBusted', dealerBusted)
+    let text = '';
     if (dealerBusted) {
-      content = 'You\'ve won!'
+      text = 'You\'ve won!';
     }
     if (playerBusted) {
-      content = 'You\'ve lost!'
+      text = 'You\'ve lost!';
     }
     if (push) {
-      content = 'It\'s a draw!'
+      text = 'It\'s a draw!';
     }
+    if (start) {
+      text = 'Start a new game!';
+    }
+
+    const content = (
+      <React.Fragment>
+        {text}
+        <Button
+          label="Deal"
+          circle
+          onClick={this.handleDeal}
+        />
+      </React.Fragment>
+    );
+
     return (
       <CSSTransition
         in={showModal}
@@ -41,19 +61,21 @@ class Modal extends React.Component {
         // onExited={}
       >
         {state => (
-          <div styles={state} className={
-            classnames(
-              styles.container,
-              {
-                [styles.enter]: state == 'entering' || state == 'appear',
-                [styles.enterActive]: state == 'entered'  || state == 'appeared' ,
-                [styles.exit]: state == 'exiting',
-                [styles.exitActive]: state == 'exited',
-              }
-            )}
+          <div
+            styles={state}
+            className={
+              classnames(
+                styles.container,
+                {
+                  [styles.enter]: state === 'entering' || state === 'appear',
+                  [styles.enterActive]: state === 'entered'  || state === 'appeared',
+                  [styles.exit]: state === 'exiting',
+                  [styles.exitActive]: state === 'exited',
+                }
+              )}
           >
             <div className={styles.window}>
-            {content}
+              {content}
             </div>
           </div>
         )}

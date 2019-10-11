@@ -7,7 +7,7 @@ import ProtectedRoute from './protected-route';
 import BoardContainer from '../views/board/board-container';
 import LoginContainer from '../views/login/login-container';
 import StartView from '../views/start/start';
-import HelpView from '../views/help/help';
+import HelpView from '../views/rules/rules';
 
 
 class Routes extends React.Component {

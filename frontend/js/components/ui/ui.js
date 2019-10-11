@@ -8,6 +8,11 @@ import styles from './ui.scss';
 
 class UI extends React.Component {
 
+  handleNew = () => {
+    const { currentPeriod, submitDecision } = this.props;
+    submitDecision('new', currentPeriod);
+  }
+
   handleDeal = () => {
     const { currentPeriod, submitDecision } = this.props;
     submitDecision('deal', currentPeriod);
@@ -26,16 +31,23 @@ class UI extends React.Component {
   handleLogout = () => {
     const { logoutUser } = this.props;
     logoutUser();
+    window.location.href = '/';
   }
 
   handleShowHelp = () => {
-
+    const { showHelp } = this.props;
+    showHelp(true);
   }
 
   render() {
     const { submitDecision } = this.props;
     return (
       <div className={styles.container}>
+        <Button
+          label="New"
+          circle
+          onClick={this.handleNew}
+        />
         <Button
           label="Deal"
           circle
@@ -64,9 +76,11 @@ class UI extends React.Component {
             small
             onClick={this.handleShowHelp}
           />
+          {/*}
           <Link to={{ pathname: '/help', state: { modal: true } }} >
             test
           </Link>
+          */}
         </div>
       </div>
     );

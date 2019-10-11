@@ -16,7 +16,7 @@ const Hand = (props) => {
 
   let username = 'Dealer';
   if (isPlayer) {
-    username = runuser.email
+    username = 'You' //username = runuser.email
   }
 
   return (

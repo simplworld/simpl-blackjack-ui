@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import Button from '../../components/button/button';
 
-import styles from './help.scss';
+import styles from './rules.scss';
 
 
-class Help extends React.Component {
+class Rules extends React.Component {
   handleClose = () => {
-    const { history } = this.props;
-    history.goBack();
+    const { showHelp } = this.props;
+    showHelp(false);
   }
 
   render() {
@@ -77,8 +77,8 @@ class Help extends React.Component {
           </ul>
           <div className={styles.actions}>
             <Button
-              label="Start"
-              onClick={() => history.goBack()}
+              label="Close"
+              onClick={() => this.handleClose()}
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ class Help extends React.Component {
   }
 }
 
-Help.propTypes = {
+Rules.propTypes = {
 };
 
-export default Help;
+export default Rules;
