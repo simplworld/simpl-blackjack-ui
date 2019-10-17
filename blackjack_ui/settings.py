@@ -123,7 +123,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles")]
 
 MODEL_SERVICE_WS = os.environ.get("MODEL_SERVICE_WS", "ws://localhost:8080/ws")
 
-SIMPL_GAMES_URL = os.environ.get("SIMPL_GAMES_URL", "http://localhost:8100/apis")
+SIMPL_GAMES_URL = os.environ.get("SIMPL_GAMES_URL", "http://api:8100/apis")
 
 SIMPL_GAMES_AUTH = ("simpl@simpl.world", "simpl")
 

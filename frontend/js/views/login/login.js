@@ -26,7 +26,7 @@ const Login = (props) => {
         <form className={styles.form}>
           <div className={styles.fields}>
             <TextField
-              name="email"
+              name="username"
               type="text"
               label="Email address"
               placeholder="Enter your email address"
@@ -65,14 +65,14 @@ Login.propTypes = {
 
 const formikContainer = withFormik({
   mapPropsToValues: () => ({
-    email: '',
+    username: '',
     password: '',
   }),
   validateOnChange: true,
   validateOnBlur: true,
   enableReinitialize: true,
   validationSchema: yup.object().shape({
-    email: yup.string()
+    username: yup.string()
       .email('Please enter a valid email')
       .required('Please enter an email!'),
     password: yup.string()
