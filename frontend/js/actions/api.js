@@ -25,6 +25,7 @@ export function createApiAction(namespace, data) {
 
   const actionCreator = (...args) => {
     let payload;
+
     if (isFunction(data)) {
       payload = data(...args);
     } else {

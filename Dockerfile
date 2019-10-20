@@ -33,7 +33,7 @@ ENV PYTHONPATH /code:$PYTHONPATH
 #    && npm run compile --production \
 #    && rm -rf node_modules
 #
-ENV MODEL_SERVICE_WS ws://model:8080/ws
+ENV MODEL_SERVICE_WS ws://localhost:8080/ws
 
 EXPOSE 8000
 CMD /code/bootstrap.sh

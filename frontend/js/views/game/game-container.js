@@ -19,6 +19,12 @@ function mapStateToProps(state) {
     (p) => scenario.id === p.scenario
   );
 
+  console.log("scenarios");
+  console.dir(scenarios);
+  console.dir(unsortedPeriods);
+  console.log("unsortedPeriods");
+  console.dir(unsortedPeriods);
+
   let data = {
     deck: [],
     player_cards: [],
@@ -48,6 +54,14 @@ function mapStateToProps(state) {
 
     currentPeriod = periods[periodOrder - 1];
   }
+  console.log("periods");
+  console.dir(unsortedPeriods);
+  console.dir(currentPeriod);
+
+  console.log("mapState");
+  console.dir(runuser);
+  console.dir(currentPeriod);
+  console.dir(data);
 
   return {
     runuser,

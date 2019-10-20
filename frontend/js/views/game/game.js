@@ -18,12 +18,26 @@ class GameView extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { data, currentPeriod, submitDecision } = this.props;
+    console.log("componentDidMount");
+    console.dir(data);
+    console.dir(currentPeriod);
+    if (data.player_cards.length === 0 && currentPeriod != null) {
+      submitDecision('deal', currentPeriod);
+    }
+  }
+
   componentDidUpdate(prevProps) {
     // dirty approach do deal new cards after initializing a new game
     const { data, currentPeriod, submitDecision } = this.props;
+    console.log("componentDidUpdate");
+    console.dir(data);
+    console.dir(currentPeriod);
+    /*
     if (data.player_cards.length === 0) {
       submitDecision('deal', currentPeriod);
-    }
+    }*/
   }
 
   toggleHelp = () => {
