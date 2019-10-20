@@ -18,7 +18,6 @@ class Start extends React.Component {
     const {
       loggedIn, user, history
     } = this.props;
-
     if (loggedIn && user) {
       return <Redirect to="/game" />;
     }
