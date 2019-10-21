@@ -9,16 +9,21 @@
   <title>Wharton Blackjack</title>
   <meta name="description" content="Wharton Blackjack">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <style>
+    .body {
+      background: #004684;
+      color: white;
+    }
+
+    #app {
+      background: #004684;
+      color: white;
+    }
+  </style>
   {% render_bundle 'main' 'css' %}
 </head>
-<style>
-  .body {
-    background: #004684;
-    color: white;
-  }
-</style>
 
-<body>
+<body style="">
   <div id="app"></div>
   <script type="text/javascript">
     var AUTOBAHN_DEBUG = false;

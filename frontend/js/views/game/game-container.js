@@ -66,7 +66,8 @@ function mapStateToProps(state) {
   return {
     runuser,
     data,
-    currentPeriod
+    currentPeriod,
+    scenario,
   };
 }
 

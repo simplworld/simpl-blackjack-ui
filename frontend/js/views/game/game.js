@@ -30,14 +30,16 @@ class GameView extends React.Component {
 
   componentDidUpdate(prevProps) {
     // dirty approach do deal new cards after initializing a new game
-    const { data, currentPeriod, submitDecision } = this.props;
+    const { data, currentPeriod, submitDecision, scenario } = this.props;
     console.log("componentDidUpdate");
     console.dir(data);
     console.dir(currentPeriod);
-    /*
-    if (data.player_cards.length === 0) {
-      submitDecision('deal', currentPeriod);
-    }*/
+    console.dir(scenario);
+    if (prevProps.currentPeriod != currentPeriod) {
+      if (data.player_cards.length === 0) {
+        submitDecision('deal', currentPeriod);
+      }
+    }
   }
 
   toggleHelp = () => {

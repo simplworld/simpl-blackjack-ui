@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import ProtectedRoute from './protected-route';
 import BoardContainer from '../views/board/board-container';
 import LoginContainer from '../views/login/login-container';
+import RegisterContainer from '../views/register/register-container';
 import StartView from '../views/start/start';
 import HelpView from '../views/rules/rules';
 
@@ -46,6 +47,7 @@ class Routes extends React.Component {
             </TransitionGroup>
             <Switch location={isModal ? this.previousLocation : props.location}>
               <Route path="/login" component={LoginContainer} />
+              <Route path="/register" component={RegisterContainer} />
               <ProtectedRoute path="/game" component={BoardContainer} />
               <Route exact path="/" component={StartView} />
             </Switch>

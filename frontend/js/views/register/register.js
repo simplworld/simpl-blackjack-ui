@@ -8,15 +8,15 @@ import Button from '../../components/button/button';
 import withFormik from '../../components/forms/withFormik';
 import TextField from '../../components/forms/textfield/textfield';
 
-import styles from './login.scss';
+import styles from './register.scss';
 
 
-const Login = (props) => {
+const Register = (props) => {
   const {
-    handleSubmit, loggedIn, isValid, isSubmitting, user,
+    handleSubmit, loggedIn, isValid, isSubmitting, user, registrationComplete
   } = props;
 
-  if (loggedIn && user) {
+  if (registrationComplete) {
     return <Redirect to="/game" />;
   }
 
@@ -26,7 +26,7 @@ const Login = (props) => {
         <form className={styles.form}>
           <div className={styles.fields}>
             <div className={styles.header}>
-              <h1>Login</h1>
+              <h1>Register</h1>
             </div>
             <TextField
               name="username"
@@ -48,7 +48,7 @@ const Login = (props) => {
           </div>
           <div className={styles.actions}>
             <Button
-              label="Login"
+              label="Register"
               className={styles.submitButton}
               onClick={handleSubmit}
               disabled={!isValid}
@@ -61,7 +61,7 @@ const Login = (props) => {
   );
 };
 
-Login.propTypes = {
+Register.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
 };
@@ -82,6 +82,6 @@ const formikContainer = withFormik({
       .required('Please enter a password')
   }),
   handleSubmit: (values, bag) => bag.props.onSubmit(values, bag),
-})(Login);
+})(Register);
 
 export default formikContainer;

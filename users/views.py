@@ -1,6 +1,9 @@
+import requests
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 
+from rest_framework import status
 from rest_framework import views
 from rest_framework.response import Response
 
@@ -13,20 +16,115 @@ from simpl import simpl_client
 from blackjack_ui.asyncio import coro
 
 from .backends import payload_to_attrs
+from .serializers import RegisterSerializer
 
 
 class LoginView(RestAuthLoginView):
     """
-    Overriding Rest Auth Login View because of CSRF issue when using Token and Session Auth
+    Overriding Rest Auth Login View because of CSRF issue when using
+    Token and Session Auth
     """
 
     authentication_classes = ()
 
 
+class RegisterView(APIView):
+    """
+    Register a new user
+    """
+
+    authentication_classes = ()
+
+    def setup_user(self, simpl_id):
+        """ Setup this user's RunUser and initial Scenario """
+        # Get Run
+        response = requests.get(
+            url=settings.SIMPL_GAMES_URL + f"runs/?game_slug={settings.GAME_SLUG}",
+            headers={"Accept": "application/json"},
+            auth=settings.SIMPL_GAMES_AUTH,
+        )
+        runs = response.json()
+        first_run = runs[0]
+        run_id = first_run["id"]
+
+        # Setup RunUser
+        response = requests.post(
+            url=settings.SIMPL_GAMES_URL + "runusers/",
+            headers={"Accept": "application/json"},
+            auth=settings.SIMPL_GAMES_AUTH,
+            data={
+                "leader": False,
+                "active": True,
+                "user": simpl_id,
+                "run": run_id,
+                "world": None,
+                "role": None,
+            },
+        )
+        runuser_data = response.json()
+
+        # Setup Scenario
+        response = requests.post(
+            url=settings.SIMPL_GAMES_URL + "scenarios/",
+            headers={"Accept": "application/json"},
+            auth=settings.SIMPL_GAMES_AUTH,
+            data={
+                "name": "Scenario 1",
+                "data": {},
+                "runuser": runuser_data["id"],
+                "world": None,
+            },
+        )
+        print(response.status_code)
+        print(response.content)
+        scenario_data = response.json()
+
+        # Setup Initial Empty Period
+        response = requests.post(
+            url=settings.SIMPL_GAMES_URL + "periods/",
+            headers={"Accept": "application/json"},
+            auth=settings.SIMPL_GAMES_AUTH,
+            data={"order": 1, "data": {}, "scenario": scenario_data["id"]},
+        )
+
+        print(response.status_code)
+        print(response.content)
+
+    def post(self, request, format=None):
+        serializer = RegisterSerializer(data=request.data)
+
+        if serializer.is_valid():
+            # process registration
+            data = {
+                "first_name": "Blackjack",
+                "last_name": "Demo",
+                "email": serializer.validated_data["username"],
+                "password": serializer.validated_data["password"],
+                "is_staff": False,
+                "is_superuser": False,
+            }
+            response = requests.post(
+                url=settings.SIMPL_GAMES_URL + "users/",
+                data=data,
+                auth=settings.SIMPL_GAMES_AUTH,
+            )
+
+            if response.status_code == 201:
+                simpl_id = response.json()["id"]
+                self.setup_user(simpl_id)
+
+            print(response.status_code)
+            print(response.content)
+            return Response({"message": "User created"})
+        else:
+            return Response(
+                {"error": "Unable to create user"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+
 class UserDetailView(APIView):
     """
     View for retrieving all the important data of a single user
-
     """
 
     permission_classes = (IsAuthenticated,)
