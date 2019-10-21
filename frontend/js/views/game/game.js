@@ -69,7 +69,7 @@ class GameView extends React.Component {
     }
 
     let showModal = false;
-    if (data.player_busted || data.dealer_busted || data.push) {
+    if (data.player_busted || data.dealer_busted || data.push || data.dealer_done) {
       showModal = true;
     }
 
@@ -80,6 +80,8 @@ class GameView extends React.Component {
         showModal={showModal}
         playerBusted={data.player_busted}
         dealerBusted={data.dealer_busted}
+        playerScore={data.player_score}
+        dealerScore={data.dealer_score}
         push={data.push}
         currentPeriod={currentPeriod}
         submitDecision={submitDecision}

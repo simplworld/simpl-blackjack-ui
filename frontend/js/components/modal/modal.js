@@ -20,10 +20,18 @@ class Modal extends React.Component {
 
   render() {
     const {
-      playerBusted, dealerBusted, push, start
+      playerBusted, dealerBusted, dealerScore, playerScore, push, start
     } = this.props;
 
     let text = '';
+    if (dealerScore < playerScore) {
+      text = 'You\'ve won!';
+    }
+
+    if (dealerScore > playerScore) {
+      text = 'You\'ve lost!';
+    }
+
     if (dealerBusted) {
       text = 'You\'ve won!';
     }
@@ -63,6 +71,8 @@ Modal.propTypes = {
   currentPeriod: PropTypes.shape().isRequired,
   dealerBusted: PropTypes.bool,
   playerBusted: PropTypes.bool,
+  playerScore: PropTypes.number,
+  dealerScore: PropTypes.number,
   push: PropTypes.bool,
   start: PropTypes.bool
 };
