@@ -11,7 +11,7 @@ module.exports = Object.assign({}, config, {
   entry: {
     // activate HMR for React
 
-    [`webpack-dev-server/client?http://localhost:${PORT}`]: `webpack-dev-server/client?http://localhost:${PORT}`,
+    [`webpack-dev-server/client?http://${HOST}:${PORT}`]: `webpack-dev-server/client?http://${HOST}:${PORT}`,
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
 
@@ -23,7 +23,7 @@ module.exports = Object.assign({}, config, {
   output: {
     filename: '[name].[hash].bundle.js',
     path: path.resolve(__dirname, './frontend/bundles'),
-    publicPath: `http://localhost:${PORT}/`,
+    publicPath: `http://${HOST}:${PORT}/`,
     // ==== Necessary for HMR to know where to load the hot update chunks
   },
   devtool: 'cheap-eval-inline-source-map',

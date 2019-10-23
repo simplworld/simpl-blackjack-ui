@@ -9,7 +9,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 // Adjust publicPath depending on local or prod
 let publicPath = 'http://localhost:8081/';
 if (process.env.NODE_ENV === 'production') {
-    publicPath = './';
+  publicPath = '/static/webpack_bundles/';
 }
 
 const config = {
@@ -24,7 +24,7 @@ const config = {
   },
   resolve: { symlinks: false },
   output: {
-    path: path.resolve('./bundles'),
+    path: path.resolve('./bundles/webpack_bundles'),
     filename: '[name].bundle.js',
   },
   module: {
