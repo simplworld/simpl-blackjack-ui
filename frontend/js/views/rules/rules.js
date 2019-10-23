@@ -25,7 +25,7 @@ class Rules extends React.Component {
           </h1>
           <p>
             In the game of Blackjack, each player competes against the dealer.
-            This demo is designed as a single-player game with no betting, no splitting,
+            This demo is designed as a single-player game with no betting and no splitting.
           </p>
           <h3>
             Objective:
@@ -33,7 +33,7 @@ class Rules extends React.Component {
           <ul>
             <li>
               Players attempt to beat the dealer by getting a hand value as
-              close to 21 as possible without going over.
+              close to 21 as possible <b>without going over</b>.
             </li>
           </ul>
           <h3>
@@ -41,13 +41,13 @@ class Rules extends React.Component {
           </h3>
           <ul>
             <li>
-              Face cards =10 points
+              Face cards = 10 points
             </li>
             <li>
               Any other card = its face value
             </li>
             <li>
-              Aces = automatically valued at 11, unless that brings the hand over 21
+              Aces = automatically valued at 11, unless that brings the hand over 21.  Then they are valued at 1.
             </li>
           </ul>
           <h3>
@@ -55,7 +55,7 @@ class Rules extends React.Component {
           </h3>
           <ul>
             <li>
-              Player receives two cards face-up
+              Player receives two cards, face-up
             </li>
             <li>
               Dealer receives two cards, one face-up, the other face-down
@@ -65,7 +65,7 @@ class Rules extends React.Component {
             </li>
             <li>
               If Dealer’s hand is 16 or less, and Player’s hand is less than 21,
-              Dealer must take card
+              the Dealer <b>must</b> take a card
             </li>
           </ul>
           <h3>
@@ -73,11 +73,10 @@ class Rules extends React.Component {
           </h3>
           <ul>
             <li>
-              The winner has a hand count closest to or exactly 21, but not more than 21
+              The winner has a hand count closest to, or exactly 21, but not more than 21
             </li>
             <li>
-              If Dealer and Player have the same score, the game is tied—Player can
-              <b>Start New Game</b>
+              If Dealer and Player have the same score, the game is tied.
             </li>
           </ul>
           <div className={styles.actions}>
