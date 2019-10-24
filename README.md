@@ -1,21 +1,31 @@
 # simpl-blackjack-ui - example blackjack game.
 
-## Python Setup (assumes Python == 3.6, simpl-games-api and blackjack-model servers running)
+This repo has a docker-compose setup which includes Python and NodeJS.  To get
+started run:
 
 ```shell
-$ create a virtual enviroment and activate it
-$ git clone git@github.com:simplworld/simpl-blackjack-ui.git
-$ cd simpl-blackjack-ui
-$ pip install -r requirements.txt
-$ python manage.py migrate
+$ docker-compose up
 ```
-## Run front end
+## Development
+
+After making any changes to the Javascript you will need to, from your host OS,
+run:
 
 ```shell
-$ ./manage.py runserver 0.0.0.0:8000
+$ make compile
 ```
 
-If you need some serious debugging help, in {{cookiecutter.app_slug}}/templates/{{cookiecutter.app_slug}}/home.html set:
+If you don't have `make` installed on your system you can run the command more
+manually with:
+
+```shell
+$ docker-compose exec ui NODE_ENV=production npm run compile
+```
+
+
+## Debugging
+
+If you need some serious debugging help, in `/core/templates/frontend/home.html` set:
 
 ```js
 var AUTOBAHN_DEBUG = true;

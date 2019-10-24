@@ -18,7 +18,6 @@ class Start extends React.Component {
     const {
       loggedIn, user, history
     } = this.props;
-
     if (loggedIn && user) {
       return <Redirect to="/game" />;
     }
@@ -42,8 +41,13 @@ class Start extends React.Component {
           <hr />
           <div className={styles.actions}>
             <Button
-              label="Start"
+              label="Login"
               onClick={() => history.push('/game')}
+            />
+            <br />
+            <Button
+              label="Register"
+              onClick={() => history.push('/register')}
             />
           </div>
           <div className={styles.footer}>

@@ -11,6 +11,12 @@ export const logoutUser = createApiAction('LOGOUT_USER', {
   method: 'POST',
 });
 
+export const registerUser = createApiAction('REGISTER_USER', formData => ({
+  endpoint: `${API_URL}/api/register/`,
+  method: 'POST',
+  body: JSON.stringify(formData),
+}));
+
 export const getUser = createApiAction('GET_USER', () => ({
   endpoint: `${API_URL}/api/me/`,
   method: 'GET',

@@ -2,12 +2,14 @@ import {
   loginUser,
   logoutUser,
   getUser,
+  registerUser,
 } from '../actions/auth';
 
 
 const initialState = {
   loading: false,
   loggedIn: false,
+  registrationComplete: false,
 };
 
 const auth = (state = initialState, action) => {
@@ -75,6 +77,12 @@ const auth = (state = initialState, action) => {
         ...state,
         loading: false,
         loggedIn: false,
+      };
+    }
+    case registerUser.SUCCESS: {
+      return {
+        ...state,
+        registrationComplete: true,
       };
     }
     default:

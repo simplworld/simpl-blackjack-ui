@@ -4,5 +4,3 @@ UI_PORT=8000
 HITCH_SETTINGS=all.settings
 MODELSERVICE_LOGLEVEL=info
 SELENIUM_IMAGE=selenium/standalone-chrome-debug:3.4.0-chromium
-CONTAINER_SIMPL_GAMES_IMAGE=learninglab.githost.io:4678/lldev-team/simpl-games-api:v1.2.5
-CONTAINER_MODEL_IMAGE=registry.learninglab.githost.io/lldev-team/simpl-calc-model:v0.1.0
