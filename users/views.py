@@ -112,10 +112,17 @@ class RegisterView(APIView):
             if response.status_code == 201:
                 simpl_id = response.json()["id"]
                 self.setup_user(simpl_id)
+                return Response({"message": "User created"})
 
             print(response.status_code)
             print(response.content)
-            return Response({"message": "User created"})
+            return Response(
+                {
+                    "message": "Unable to create user",
+                    "status_code": response.status_code,
+                    "error_content": response.content,
+                }
+            )
         else:
             return Response(
                 {"error": "Unable to create user"}, status=status.HTTP_400_BAD_REQUEST
