@@ -10,6 +10,7 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    command: /code/compose-bootstrap.sh
     environment:
       - DJANGO_SETTINGS_MODULE=blackjack_ui.settings
       - MODEL_SERVICE_WS=ws://localhost:8080/ws

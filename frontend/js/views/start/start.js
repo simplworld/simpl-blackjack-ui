@@ -30,7 +30,7 @@ class Start extends React.Component {
             <h1>Simpl Blackjack</h1>
           </div>
           <p>
-            {'This Blackjack game has been built on Simpl. Simpl is an open-source simulation platform created by Wharton\'s Learning Lab.'}
+            {'This Blackjack game has been built on Simpl. Simpl is an open-source simulation platform created by The Wharton Learning Lab and Wharton Interactive.'}
           </p>
           <Link
             to={{ pathname: '/help', state: { modal: true } }}
@@ -52,9 +52,7 @@ class Start extends React.Component {
           </div>
           <div className={styles.footer}>
             <p>
-              Designed to help developers build customized, amazing simulations,
-              singel and multiplayer games. Simpl transforms learning experiences
-              with serious gameplay.
+              Designed to help developers build meaningful educational experiences using simulations and games.
             </p>
           </div>
         </div>

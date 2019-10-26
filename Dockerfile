@@ -1,25 +1,5 @@
 FROM gladiatr72/just-tini:latest as tini
 
-#FROM node:10 as builder-js
-
-#RUN mkdir /build
-#RUN mkdir /app
-#WORKDIR /build
-
-#COPY package.json /build
-#COPY package-lock.json /build
-#COPY .babelrc /build
-
-#RUN npm install
-#RUN npm rebuild node-sass
-#RUN npm install -g webpack@3.10.0
-
-#WORKDIR /app
-#COPY . /app/
-#RUN cp -pR /build/node_modules/ /code
-#RUN NODE_ENV=production npm run compile
-
-
 FROM revolutionsystems/python:3.6.9-wee-optimized-lto
 
 LABEL Description="Image for simpl-blackjack-ui" Vendor="Wharton" Version="0.1.0"
@@ -33,7 +13,6 @@ RUN mkdir /code/staticfiles/webpack_bundles
 WORKDIR /code
 
 COPY --from=tini /tini /tini
-#COPY --from=builder-js /app/bundles /code/staticfiles/webpack_bundles/
 
 RUN pip install --upgrade pip
 
@@ -50,7 +29,7 @@ RUN npm install
 
 ADD . /code/
 
-RUN NODE_ENV=production npm run compile
+#RUN NODE_ENV=production npm run compile
 
 ENV PYTHONPATH /code:$PYTHONPATH
 ENV MODEL_SERVICE_WS ws://localhost:8080/ws
