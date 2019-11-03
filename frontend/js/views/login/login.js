@@ -34,6 +34,7 @@ const Login = (props) => {
               label="Email address"
               placeholder="Enter your email address"
               className="form-control"
+              autofocus
               required
             />
             <TextField

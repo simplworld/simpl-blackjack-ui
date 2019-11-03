@@ -15,29 +15,29 @@ class GameView extends React.Component {
     super(props);
     this.state = {
       showHelp: false,
+      dealing: false,
     };
   }
 
   componentDidMount() {
-    const { data, currentPeriod, submitDecision } = this.props;
+    const { data, currentScenario, currentPeriod, numPeriods } = this.props;
     console.log("componentDidMount");
-    console.dir(data);
     console.dir(currentPeriod);
-    if (data.player_cards.length === 0 && currentPeriod != null) {
-      submitDecision('deal', currentPeriod);
+    console.dir(currentScenario);
+    if (data.player_cards.length === 0 && currentPeriod != null && numPeriods === 1) {
+      this.deal(currentScenario);
     }
   }
 
   componentDidUpdate(prevProps) {
     // dirty approach do deal new cards after initializing a new game
-    const { data, currentPeriod, submitDecision, scenario } = this.props;
+    const { data, currentScenario, currentPeriod, numPeriods } = this.props;
     console.log("componentDidUpdate");
-    console.dir(data);
     console.dir(currentPeriod);
-    console.dir(scenario);
-    if (prevProps.currentPeriod != currentPeriod) {
-      if (data.player_cards.length === 0) {
-        submitDecision('deal', currentPeriod);
+    console.dir(currentScenario);
+    if (prevProps.currentPeriod !== currentPeriod) {
+      if (numPeriods === 1 && data.player_cards.length === 0) {
+        this.deal(currentScenario);
       }
     }
   }
@@ -55,9 +55,22 @@ class GameView extends React.Component {
     });
   }
 
+  deal = (currentScenario) => {
+    const { submitDecision } = this.props;
+    const dealing = this.state[dealing];
+    console.dir(dealing)
+    if (dealing) {
+      console.log("Already dealing...")
+      return;
+    }
+    this.setState({ dealing: true });
+    submitDecision('deal', currentScenario);
+    console.log("Dealing...")
+  }
+
   render() {
     const {
-      submitDecision, currentPeriod, data, runuser, logoutUser
+      submitDecision, currentPeriod, data, runuser, logoutUser, currentScenario, dealNewGame,
     } = this.props;
     const { showHelp } = this.state;
 
@@ -83,8 +96,8 @@ class GameView extends React.Component {
         playerScore={data.player_score}
         dealerScore={data.dealer_score}
         push={data.push}
-        currentPeriod={currentPeriod}
-        submitDecision={submitDecision}
+        currentScenario={currentScenario}
+        dealNewGame={dealNewGame}
       />
     );
 
@@ -104,7 +117,9 @@ class GameView extends React.Component {
         <UI
           showHelp={() => this.toggleHelp()}
           currentPeriod={currentPeriod}
+          currentScenario={currentScenario}
           submitDecision={submitDecision}
+          dealNewGame={dealNewGame}
           logoutUser={logoutUser}
         />
         {showModal && modal}
@@ -116,7 +131,9 @@ class GameView extends React.Component {
 
 GameView.propTypes = {
   submitDecision: PropTypes.func.isRequired,
-  currentPeriod: PropTypes.shape().isRequired,
+  dealNewGame: PropTypes.func.isRequired,
+  currentPeriod: PropTypes.shape(),
+  currentScenario: PropTypes.number.isRequired,
   data: PropTypes.shape(),
   logoutUser: PropTypes.func.isRequired,
   runuser: PropTypes.shape(),
@@ -134,6 +151,7 @@ GameView.defaultProps = {
     push: false,
     player_done: false
   },
+  currentPeriod: {},
   runuser: {}
 };
 

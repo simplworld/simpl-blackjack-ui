@@ -8,18 +8,18 @@ import styles from './ui.scss';
 
 class UI extends React.Component {
   handleNew = () => {
-    const { currentPeriod, submitDecision } = this.props;
-    submitDecision('new', currentPeriod);
+    const { currentScenario, dealNewGame } = this.props;
+    dealNewGame(currentScenario);
   }
 
   handleHit = () => {
-    const { currentPeriod, submitDecision } = this.props;
-    submitDecision('hit', currentPeriod);
+    const { currentScenario, submitDecision } = this.props;
+    submitDecision('hit', currentScenario);
   }
 
   handleStand = () => {
-    const { currentPeriod, submitDecision } = this.props;
-    submitDecision('stand', currentPeriod);
+    const { currentScenario, submitDecision } = this.props;
+    submitDecision('stand', currentScenario);
   }
 
   handleLogout = () => {
@@ -72,14 +72,16 @@ class UI extends React.Component {
 }
 
 UI.propTypes = {
-  currentPeriod: PropTypes.shape().isRequired,
+  currentPeriod: PropTypes.shape(),
+  currentScenario: PropTypes.number.isRequired,
   logoutUser: PropTypes.func.isRequired,
   submitDecision: PropTypes.func.isRequired,
+  dealNewGame: PropTypes.func.isRequired,
   showHelp: PropTypes.func.isRequired,
 };
 
 UI.defaultProps = {
-
+  currentPeriod: {}
 };
 
 export default UI;
