@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { submitDecision } from '../../actions/game';
+import { submitDecision, dealNewGame, startDealing, stopDealing } from '../../actions/game';
 import { logoutUser } from '../../actions/auth';
 
 // figure out missing underscore import
@@ -15,13 +15,13 @@ function mapStateToProps(state) {
   );
   const sorted_scenarios = _.sortBy(scenarios, (s) => s.created);
   const scenario = sorted_scenarios[sorted_scenarios.length - 1];
+  const currentScenario = scenario.id;
   const unsortedPeriods = state.simpl.period.filter(
     (p) => scenario.id === p.scenario
   );
 
   console.log("scenarios");
   console.dir(scenarios);
-  console.dir(unsortedPeriods);
   console.log("unsortedPeriods");
   console.dir(unsortedPeriods);
 
@@ -38,7 +38,9 @@ function mapStateToProps(state) {
   };
   let currentPeriod = null;
 
-  if (unsortedPeriods.length === 0) {
+  const numPeriods = unsortedPeriods.length;
+
+  if (numPeriods === 0) {
     currentPeriod = null;
   } else {
     const periods = _.sortBy(unsortedPeriods, (p) => p.order);
@@ -46,28 +48,28 @@ function mapStateToProps(state) {
 
     if (periodOrder > 1) {
       const lastPeriod = periods[periodOrder - 2];
-      const lastResult = state.simpl.result.find(
-        (s) => lastPeriod.id === s.period
-      );
-      data = lastResult.data.data;
+      if (lastPeriod) {
+        const lastResult = state.simpl.result.find(
+          (s) => lastPeriod.id === s.period
+        );
+        if (lastResult) {
+          if (lastResult && lastResult.data) {
+            data = lastResult.data.data;
+          }
+        }
+      }
     }
 
     currentPeriod = periods[periodOrder - 1];
   }
-  console.log("periods");
-  console.dir(unsortedPeriods);
-  console.dir(currentPeriod);
-
-  console.log("mapState");
-  console.dir(runuser);
-  console.dir(currentPeriod);
-  console.dir(data);
 
   return {
     runuser,
     data,
     currentPeriod,
     scenario,
+    currentScenario,
+    numPeriods,
   };
 }
 
@@ -79,6 +81,9 @@ function mapDispatchToProps(dispatch, ownProps) {
         return;
       }
       dispatch(submitDecision(currentPeriod, action));
+    },
+    dealNewGame(currentScenario) {
+      dispatch(dealNewGame(currentScenario));
     }
   };
 }

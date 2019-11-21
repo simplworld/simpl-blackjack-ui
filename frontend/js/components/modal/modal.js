@@ -14,8 +14,8 @@ class Modal extends React.Component {
   }
 
   handleDeal = () => {
-    const { currentPeriod, submitDecision } = this.props;
-    submitDecision('new', currentPeriod);
+    const { currentScenario, dealNewGame } = this.props;
+    dealNewGame(currentScenario);
   }
 
   render() {
@@ -67,8 +67,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  submitDecision: PropTypes.func.isRequired,
-  currentPeriod: PropTypes.shape().isRequired,
+  currentScenario: PropTypes.number.isRequired,
   dealerBusted: PropTypes.bool,
   playerBusted: PropTypes.bool,
   playerScore: PropTypes.number,
