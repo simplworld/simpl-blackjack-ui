@@ -4,7 +4,7 @@ from django.views import generic
 
 from simpl import simpl_client
 
-from blackjack_ui.asyncio import coro
+from simpl_blackjack_ui.asyncio import coro
 
 
 class HomeView(LoginRequiredMixin, generic.TemplateView):
