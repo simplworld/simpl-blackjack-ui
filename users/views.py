@@ -13,7 +13,7 @@ from rest_auth.views import LoginView as RestAuthLoginView
 
 from simpl import simpl_client
 
-from blackjack_ui.asyncio import coro
+from simpl_blackjack_ui.asyncio import coro
 
 from .backends import payload_to_attrs
 from .serializers import RegisterSerializer

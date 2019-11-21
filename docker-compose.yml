@@ -12,7 +12,7 @@ services:
       - "8000:8000"
     command: /code/compose-bootstrap.sh
     environment:
-      - DJANGO_SETTINGS_MODULE=blackjack_ui.settings
+      - DJANGO_SETTINGS_MODULE=simpl_blackjack_ui.settings
       - MODEL_SERVICE_WS=ws://localhost:8080/ws
       - SIMPL_GAMES_URL=http://api:8000/apis/
     stop_signal: SIGKILL
